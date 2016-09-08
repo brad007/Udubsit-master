@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_events"
+            android:icon="@drawable/ic_today_black_24dp"
+            android:title="Events" />
+        <item
+            android:id="@+id/nav_adverts"
+            android:icon="@drawable/ic_label_black_24dp"
+            android:title="Adverts" />
+        <item
+            android:visible="false"
+            android:id="@+id/nav_notices"
+            android:icon="@drawable/ic_notifications_active_black_24dp"
+            android:title="Notices" />
+        <item
+            android:visible="false"
+            android:id="@+id/nav_shout_outs"
+            android:icon="@drawable/ic_volume_up_black_24dp"
+            android:title="Shoutouts" />
+        <item
+            android:id="@+id/nav_points_of_interest"
+            android:icon="@drawable/ic_map_black_24dp"
+            android:title="Points of interest" />
+        <item
+            android:id="@+id/nav_groups"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="Groups" />
+        <item
+            android:id="@+id/nav_schedule"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="Schedule" />
+
+        <item
+            android:id="@+id/nav_ikamva"
+            android:icon="@drawable/ic_public_black_24dp"
+            android:title="Ikamva"/>
+        <item
+            android:visible="false"
+            android:id="@+id/nav_chats"
+            android:icon="@drawable/ic_question_answer_black_24dp"
+            android:title="Chats" />
+    </group>
+
+    <item android:title="Additional Options">
+        <menu>
+            <item
+                android:visible="false"
+                android:id="@+id/nav_settinqs"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_arrow_back_black_24dp"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/view_event_linear_layout"
+    android:visibility="visible"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical">
+    <android.support.v7.widget.CardView
+        android:id="@+id/date_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_today_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/start_date_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Wednesday, May 18"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/start_time_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="From: 11:00 AM"
+                    android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/end_date_text"
+                    android:visibility="visible"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Wednesday, May 25"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/end_time_text"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="To: 15:00 PM"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/location_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_map_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/event_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="22Seven"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/event_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="60 Hout street, cape town, 8001, Cape Town"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_group_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/event_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Group: Hiking"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/event_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Category: Sports"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:id="@+id/contact_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/event_owner_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/facebook_avatar" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/event_owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bart V"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/event_owner_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3368238@myuwc.ca.za"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

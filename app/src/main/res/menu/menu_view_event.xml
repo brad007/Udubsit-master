@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ionicframework.udubsit252887.ui.ViewEventActivity">
+    <item
+        android:id="@+id/action_rsvp"
+        android:orderInCategory="100"
+        android:title="RSVP"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_update"
+        android:orderInCategory="100"
+        android:title="UPDATE"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_update_event"
+        android:orderInCategory="100"
+        android:title="Update Event"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_remove_event"
+        android:title="Remove Event"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_report"
+        android:title="Report"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="event_options_array">
+        <item>Image</item>
+        <item>Comment</item>
+    </string-array>
+
+    <string-array name="schedual_filter">
+        <item>Building</item>
+        <item>Room</item>
+        <item>Lecturer</item>
+        <item>Title</item>
+        <item>Start Date</item>
+    </string-array>
+</resources>
