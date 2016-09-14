@@ -100,15 +100,12 @@ public class RegisterActivity extends BaseActivity implements
                 GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
                 if (result.isSuccess()) {
                     GoogleSignInAccount account = result.getSignInAccount();
-                    if (account.getEmail().contains("myuwc.ac.za")) {
-                        firebaseAuthWithGoogle(account);
-                    } else {
-                        progressDialog.dismiss();
-                        signOut();
-                        Toast.makeText(RegisterActivity.this, "Not a uwc email address", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    progressDialog.dismiss();
+                    //  if (account.getEmail().contains("myuwc.ac.za")) {
+                    firebaseAuthWithGoogle(account);
+                    //    } else {
+                    //      progressDialog.dismiss();
+                    //     signOut();
+                    //    Toast.makeText(RegisterActivity.this, "Not a uwc email address", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 progressDialog.dismiss();
@@ -117,6 +114,8 @@ public class RegisterActivity extends BaseActivity implements
             progressDialog.dismiss();
         }
     }
+
+
 
     private void firebaseAuthWithGoogle(final GoogleSignInAccount account) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + account.getDisplayName());
