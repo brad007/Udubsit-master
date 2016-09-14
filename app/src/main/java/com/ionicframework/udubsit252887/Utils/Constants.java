@@ -49,4 +49,5 @@ public class Constants {
     public static final String EVENT_GROUP = "group";
     public static final String POSITION = "position";
     public static final String MY_ADS_KEY = "myAds";
+    public static final String DELETE_NODE = "deletedNode";
 }

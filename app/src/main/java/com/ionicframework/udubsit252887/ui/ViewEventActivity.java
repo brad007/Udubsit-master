@@ -216,6 +216,24 @@ public class ViewEventActivity extends AppCompatActivity {
             pd.setCancelable(false);
             pd.show();
 
+
+            FirebaseDatabase.getInstance().getReference(Constants.EVENTS_KEY).child(groupID).child(eventID)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Event event = dataSnapshot.getValue(Event.class);
+                            FirebaseDatabase.getInstance().getReference(Constants.DELETE_NODE)
+                                    .child(groupID)
+                                    .child(eventID)
+                                    .setValue(event);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
             FirebaseDatabase.getInstance().getReference(Constants.EVENTS_KEY).child(groupID).child(eventID).removeValue();
             FirebaseDatabase.getInstance().getReference(Constants.EVENTS_DETAIL_IMAGES_KEY).child(eventID).removeValue();
 
