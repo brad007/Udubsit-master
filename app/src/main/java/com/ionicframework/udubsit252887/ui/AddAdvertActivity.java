@@ -9,6 +9,8 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -26,13 +28,39 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddAdvertActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+import fr.ganfra.materialspinner.MaterialSpinner;
+
+public class AddAdvertActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
     private static final int PLACE_PICKER_REQUEST = 1;
     private static final int IMAGE_PICKER = 2;
     private Ads ads;
     private Calendar now;
     private Bitmap image;
+/*
+
+Advertisements
+Accommodation
+Special offers
+Menu
+Jobs (Part time)
+Jobs (Full time)
+Books (new)
+Books (2nd hand)
+Class notes
+Sporting goods
+Tutoring
+Miscellaneous
+
+ */
+
+    String[]ITEMS = {"Advertisements", "Accomodation", "Special offers", "Menu", "Jobs(Part time)", "Jobs(Full time)", "Books (new)", "Books (second hand)",
+    "Class notes", "Sporting goods", "Tutoring", "Miscellaneous"};
+
+
+    ArrayAdapter<String> adapter;
+    private MaterialSpinner spinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +82,12 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.adDate).setOnClickListener(this);
 
         ads = new Ads();
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ITEMS);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner = (MaterialSpinner) findViewById(R.id.spinner);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
     private void createAd() {
@@ -159,5 +193,23 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         date.setMonth(monthOfYear);
         date.setDate(dayOfMonth);
         ads.setAdvertDue(date.getTime());
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String item = (String) adapterView.getSelectedItem();
+        ads.setAdvertCategory(item);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        String item = (String) adapterView.getSelectedItem();
+        ads.setAdvertCategory(item);
     }
 }

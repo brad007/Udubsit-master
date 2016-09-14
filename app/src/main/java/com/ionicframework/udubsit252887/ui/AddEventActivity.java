@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,10 +42,12 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
+import fr.ganfra.materialspinner.MaterialSpinner;
+
 public class AddEventActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener,
-        AdapterView.OnItemSelectedListener,CompoundButton.OnCheckedChangeListener {
+        AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemClickListener {
 
     static final int PLACE_PICKER_REQUEST = 2;
     private static final String TAG = AddEventActivity.class.getSimpleName();
@@ -68,6 +71,18 @@ public class AddEventActivity extends AppCompatActivity implements
     private Date startDate = new Date(System.currentTimeMillis());
     private Date endDate = new Date(System.currentTimeMillis());
     private Bitmap image;
+
+    /*
+    String[] ITEMS = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"};
+ ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
+ adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+ spinner = (MaterialSpinner) findViewById(R.id.spinner);
+ spinner.setAdapter(adapter);
+     */
+
+    String[] ITEMS = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"};
+    ArrayAdapter<String> adapter;
+    private MaterialSpinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +145,7 @@ public class AddEventActivity extends AppCompatActivity implements
         if (event.getDescription().length() <= 10 || event.getDescription().length() >= 500) {
 
             Log.v(TAG, "invalid d_length");
-        //    return;
+            //    return;
         }
         if (image == null) {
             Log.v(TAG, "No image");
@@ -138,7 +153,7 @@ public class AddEventActivity extends AppCompatActivity implements
         }
         if (event.getCategory() == null) {
             Log.v(TAG, "No category");
-      //      return;
+            //      return;
         }
         event.setGroup("Academic Info");
         event.setNumOfPeople(0L);
@@ -164,7 +179,7 @@ public class AddEventActivity extends AppCompatActivity implements
                     event.setAddress((String) place.getAddress());
                     event.setLocationDescription((String) place.getName());
 
-                    TextView locationText = (TextView)findViewById(R.id.location_text);
+                    TextView locationText = (TextView) findViewById(R.id.location_text);
                     locationText.setText(event.getLocationDescription() + ", " + event.getAddress());
 
                     Log.v(TAG, place.getLatLng().longitude + ":" + place.getLatLng().longitude);
@@ -174,7 +189,7 @@ public class AddEventActivity extends AppCompatActivity implements
                 case IMAGE_PICKER:
                     Log.v(TAG, "image picker");
                     Bundle extras = data.getExtras();
-                    if(extras != null) {
+                    if (extras != null) {
                         image = extras.getParcelable("data");
                         addImageView.setImageBitmap(image);
                     }
@@ -197,6 +212,7 @@ public class AddEventActivity extends AppCompatActivity implements
         endTimeView.setOnClickListener(this);
         addLocationView.setOnClickListener(this);
         addImageView.setOnClickListener(this);
+        spinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -342,7 +358,6 @@ public class AddEventActivity extends AppCompatActivity implements
     }
 
 
-
     private void setAllDay() {
 
     }
@@ -350,7 +365,7 @@ public class AddEventActivity extends AppCompatActivity implements
 
     private void initialiseScreen() {
 
-        allDaySwitch = (Switch)findViewById(R.id.all_day_switch);
+        allDaySwitch = (Switch) findViewById(R.id.all_day_switch);
         eventTitleView = (EditText) findViewById(R.id.event_title_view);
         eventTitleView.setError("10 - 35 characters");
 
@@ -363,6 +378,10 @@ public class AddEventActivity extends AppCompatActivity implements
         addLocationView = (LinearLayout) findViewById(R.id.add_location_view);
         addImageView = (ImageView) findViewById(R.id.event_image);
 
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ITEMS);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner = (MaterialSpinner) findViewById(R.id.spinner);
+        spinner.setAdapter(adapter);
 
     }
 
@@ -381,7 +400,7 @@ public class AddEventActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_event:
-                Log.v(TAG,"add event");
+                Log.v(TAG, "add event");
                 sendEvent();
                 return true;
         }
@@ -400,11 +419,20 @@ public class AddEventActivity extends AppCompatActivity implements
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+        String item = (String) adapterView.getSelectedItem();
+        event.setCategory(item);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        String item = (String) adapterView.getSelectedItem();
+        event.setCategory(item);
     }
 }

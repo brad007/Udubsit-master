@@ -27,6 +27,13 @@
         android:hint="Cost"
         android:textSize="24sp" />
 
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:ms_hint="Categories" />
+
     <Button
         android:id="@+id/adImage"
         android:layout_width="match_parent"

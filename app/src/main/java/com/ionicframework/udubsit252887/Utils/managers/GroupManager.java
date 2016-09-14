@@ -58,6 +58,24 @@ public class GroupManager {
 
                     }
                 });
+
+        FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY)
+                .child(pushID)
+                .child("numOfUsers")
+                .runTransaction(new Transaction.Handler() {
+                    @Override
+                    public Transaction.Result doTransaction(MutableData mutableData) {
+                        long numOfUsers = (long) mutableData.getValue();
+                        numOfUsers++;
+                        mutableData.setValue(numOfUsers);
+                        return Transaction.success(mutableData);
+                    }
+
+                    @Override
+                    public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
+                    }
+                });
     }
 
     public static void addMember(Person person, DatabaseReference databaseRef, Context context) {
