@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,9 +22,9 @@ public class Utils {
         return arr[arr.length - 1];
     }
 
-    public static String getDay(int n){
+    public static String getDay(int n) {
 
-        switch (n){
+        switch (n) {
             case 1:
                 return "Mon";
             case 2:
@@ -41,8 +42,8 @@ public class Utils {
         }
     }
 
-    public static String getMonth(int n){
-        switch (n){
+    public static String getMonth(int n) {
+        switch (n) {
             case 0:
                 return "Jan";
             case 1:
@@ -72,7 +73,11 @@ public class Utils {
 
 
     public static String getUserEmail() {
-        return FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",");
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            return firebaseUser.getEmail().replace(".", ",");
+        }
+        return null;
     }
 
     public static String getDate(String date) {

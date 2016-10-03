@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.ionicframework.udubsit252887.BaseActivity;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
+import com.ionicframework.udubsit252887.dialogs.TermsAndConditionDialog;
 import com.ionicframework.udubsit252887.models.Users;
 
 public class RegisterActivity extends BaseActivity implements
@@ -47,7 +49,7 @@ public class RegisterActivity extends BaseActivity implements
         setContentView(R.layout.activity_register);
         //Button listener
         findViewById(R.id.google_sign_in).setOnClickListener(this);
-
+        findViewById(R.id.terms_and_conditions_textview).setOnClickListener(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("24525356875-4hj2tuoq8b9itqclg0nu1ocogdnqsp2h.apps.googleusercontent.com")
                 .requestEmail()
@@ -100,21 +102,21 @@ public class RegisterActivity extends BaseActivity implements
                 GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
                 if (result.isSuccess()) {
                     GoogleSignInAccount account = result.getSignInAccount();
-                    //  if (account.getEmail().contains("myuwc.ac.za")) {
-                    firebaseAuthWithGoogle(account);
-                    //    } else {
-                    //      progressDialog.dismiss();
-                    //     signOut();
-                    //    Toast.makeText(RegisterActivity.this, "Not a uwc email address", Toast.LENGTH_SHORT).show();
+                    if (account.getEmail().contains("myuwc.ac.za")) {
+                        firebaseAuthWithGoogle(account);
+                    } else {
+                        progressDialog.dismiss();
+                        signOut();
+                        Toast.makeText(RegisterActivity.this, "Not a uwc email address", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    progressDialog.dismiss();
                 }
             } else {
                 progressDialog.dismiss();
             }
-        } else {
-            progressDialog.dismiss();
         }
     }
-
 
 
     private void firebaseAuthWithGoogle(final GoogleSignInAccount account) {
@@ -181,9 +183,12 @@ public class RegisterActivity extends BaseActivity implements
                 progressDialog.show();
                 signIn();
                 break;
+            case R.id.terms_and_conditions_textview:
+                DialogFragment termsDialog = new TermsAndConditionDialog();
+                termsDialog.show(getSupportFragmentManager(), null);
+                break;
         }
     }
-
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -208,5 +213,10 @@ public class RegisterActivity extends BaseActivity implements
             temp += (word + " ");
         }
         return temp;
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finishAffinity();
     }
 }

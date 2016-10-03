@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_margin="16dp"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="By downloading and/or using the UDUBS-IT APP, these terms and conditions will automatically apply to the user. It is therefore important that the user reads these terms and conditions carefully before downloading, installing or using the UDUBS-IT APP.
+\n\n
+Terms and Conditions
+\n\n
+1.	GENERAL
+1.1	Thank you for visiting the UDUBS-IT mobile application (hereinafter the UDUBS-IT APP).
+1.2	The UDUBS-IT APP shall mean the software provided by the University of the Western Cape (“UWC”) for the use on GPS enabled Android OS devices, any upgrades from time to time and any other software or documentation which enables the use of the UDUBS-IT APP. The UDUBS-IT APP will include but not be limited to the mobile app, its social media channels and/or ancillary services, authored or operated by UWC.
+1.3	By downloading and/or using the UDUBS-IT APP, these terms and conditions will automatically apply to the user. It is therefore important that the user reads these terms and conditions carefully before downloading, installing or using the UDUBS-IT APP.
+1.4	Should the user not agree to the terms and conditions DO NOT download, install, access or use the UDUBS-IT APP.
+1.5	Users must be over the age of 18 years old or have the consent of his/her guardian to download, install, access or use UDUBS-IT APP. By downloading, installing, accessing and using the UDUBS-IT APP, the user confirms he/she is 18 years old or older or has the consent of his/her guardian to download, install, access or use the UDUBS-IT APP.
+\n\n
+2.	PURPOSE OF THE UDUBS-IT APP
+\n\n
+2.1	The UDUBS-IT APP aims to facilitate a local social community around UWC and assist the user to obtain AND share information about events, advertisements, notices and “shout-out” messages related to UWC.
+\n\n
+3.	DATA PROTECTION
+3.1	Any personal information supplied by the user to UWC when using the UDUBS-IT APP will be subject to the Promotion of Access to Information Act (PAIA) and the University of the Western Cape’s Manual for the Promotion of Access to Information Act. To View MANUAL and ACT please visit:
+https://www.uwc.ac.za/Pages/Governance.aspx
+\n\n
+\n\n
+3.2	Any personal information published by the user using the UDUBS-IT APP, social media channels and any ancillary services or platforms may be accessible and visible to third parties and other users.
+3.3	The user hereby grants consent for his/her personal information, including his/her location to be made available to third parties when using the UDUBS-IT APP. Also refer to clause 7.4 below.
+\n\n
+4.	UWC WEBSITE
+To the extent of the UDUBS-IT APP allowing the user access to certain functionality of the UWC website, such access shall be governed by the UWC website Terms and Conditions.
+\n\n
+5.	PROPRIETARY RIGHTS, LICENCES AND CONDITIONS OF USE
+5.1	All trademarks, copyright, database rights and other intellectual property rights of any nature in the UDUBS-IT APP together with the underlying Software code are owned either directly by UWC or by UWC’s licensors.
+5.2	By the user accepting these Terms and Conditions through the download and installation of the UDUBS-IT APP, UWC grants to the user a non-exclusive, royalty-free, revocable licence, to use the UDUBS-IT APP for personal, non-commercial use only, within South Africa.
+5.3	UDUBS-IT APP may not be used by the user for any commercial purposes, including but not limited to the commercial collection of data.
+5.4	All data collected by the UDUBS-IT APP will be the property of UWC.
+5.5	The user may not, nor attempt to, in person or through a third party acting on his/her behalf, do any of the following:
+(i)	make and distribute copies of the UDUBS-IT APP;
+(ii)	copy, reproduce, alter, modify, reverse engineer, disassemble, decompile, transfer, exchange or translate the UDUBS-IT APP;
+(iii)	create derivative works of the UDUBS-IT APP of whatsoever kind; and
+(iv)	do any other act that reveals or may reveal the source code of the UDUBS-IT APP or any portion thereof.
+5.6	Whilst the UDUBS-IT APP is available for download, installation, access and use at no cost to the user, the user acknowledges that the terms and conditions of the user’s (or the mobile contract owner’s) agreement with his/her mobile network service provider (the “network service provider”) will continue to apply when using the UDUBS-IT APP. As such, the user may be charged by the network service provider for access to the network connection services for the duration of the connection while accessing, downloading, installing or using the UDUBS-IT APP or any other third party charges as may arise or be applicable. The user accepts responsibility for any such charges. Refer to clause 10 below.
+5.7	If the user is not the account payer, by acceptance of these terms and conditions, it is assumed that the permission of the account payer has been received by the user to download, install, access and use the UDUBS-IT APP.
+\n\n
+6.	USER RULES
+6.1	The user may not use UDUBS-IT for any illegal activity;
+6.2	The user may not use UDUBS-IT for any activities or actions prohibited by the rules and regulations of UWC including but not limited to the student disciplinary rules
+ (http://www.cs.uwc.ac.za/~btucker/cos101/studentDisciplinaryRules.pdf );
+6.3	Use of the UDUBS-IT application is governed by the official Network Security and IT Security policies of the University of the Western Cape as accepted by Council and amended from time to time.
+6.4	All interactions, publications, including but not limited to comments, updates, “shout outs” et cetera shall be free of:
+•	Racism (including offensive comments based on ethnicity and nationality)
+•	Sexism
+•	Homophobia
+•	Religious intolerance
+•	Cyber bullying
+•	Hate speech
+•	Derogatory language
+•	The incitement of violence.
+\n\n
+6.5	User comments must remain relevant to the articles they are made or appear on and shall not include general banter, conversation or comments of a personal nature.
+6.6	The administrator reserves the right to: 1) remove any comments that do not follow the above guidelines; and 2) ban users who repeatedly infringe the rules.
+6.7	Should the user find any comments to be upsetting or offensive these may flagged or reported to the administrator wo will determine whether the comment/s infringe the applicable guidelines.
+6.8	The user may not use the results obtained through its use of the UDUBS-IT APP for any purpose other than to assist the user in his/her personal capacity.
+6.9	The user may not use the location data provided for any purpose other than as defined by UDUBS-IT.
+6.10	The user shall provide accurate information and warrants that all information provided for use of the UDUBS-IT APP, including but not limited to his/her email address, name, surname and contact numbers, will be correct.
+\n\n
+7.	RIGHTS OF THE OWNER (UWC) OF THE UDUBS-IT APP
+7.1	UWC may alter and amend these terms and conditions at any time and at its sole discretion and the responsibility is on the user to ensure that he/she is aware of the current terms and conditions, which may be accessed at https://www.uwc.ac.za/Pages/Disclaimer.aspx.
+7.2	A user’s right to access and use the UDUBS-IT APP may be revoked at any time and the user will have no claim against UWC or any other party in such event, nor will he/she be entitled to dispute the legality of the revocation of access.
+7.3	All data collected through the UDUBS-IT APP will be the property of UWC.
+7.4	The user explicitly agrees that his/her personal information, including his/her location, may be made available to third parties when he/she uses the UDUBS-IT APP. Although UWC will take reasonable care when and how such information is be made available, the user understands and agrees that some information will be made available to third parties when he/she uses the UDUBS-IT APP e.g. when you activate an emergency – the user’s details, including location, will be made available to third parties (Including, but not limited to, emergency service providers).
+7.5	UWC reserves the right, in its sole discretion, to change, update, and modify the UDUBS-IT APP, including the removal of certain services at any time.
+7.6	UWC may verify the user’s identity based on the information provided to it by the user – e.g. through an automated email verification process.
+7.7	Although the UDUBS-IT APP is currently made available to the user free of charge for the personal, non-commercial use of the user, UWC reserves the right to amend or withdraw the UDUBS-IT APP or charge for the UDUBS-IT APP or service provided to the user in accordance with these terms and conditions at any time and for any reason.
+\n\n
+8.	INDEMNITIES
+8.1	The UDUBS-IT APP is not intended as an emergency communication channel. Any person who raises, or causes to raise an alarm is liable for all and any costs associated with such alarm – the user specifically indemnifies and holds UWC, its employees, directors and associates harmless against any such claims that may arise due the use of the UDUBS-IT APP.
+8.2	The user indemnifies and holds UWC, its employees, directors, executive management and associates harmless against any injury, illness, loss of limb, loss of life, financial losses, loss of property and other assets, emotional distress, reputation risk, harm or damage and the like, that may arise due the use of the UDUBS-IT APP.
+8.3	Raising a false alarm or hoax call is a serious offence in the Republic of South Africa, and may lead to civil and/or criminal charges against you.
+8.4	The UDUBS-IT APP is not intended as an emergency communication channel. In case of an emergency it aims to complement other emergency services which the user may elect to utilize;
+\n\n
+9.	WARRANTY AND LIABILITY DISCLAIMER
+9.1	UWC does not warrant that the mobile application portion of UDUBS-IT APP will be compatible with the user’s mobile device.
+9.2	UWC does not warrant the correct functioning or the correct results, data or information being provided to the user by the UDUBS-IT APP.
+9.3	UWC does not warrant a response by or the correctness of a response by any third party service providers, nor does it warrant the quality of their service, the reaction time or if such service provider will respond to the user at all.
+9.4	UWC does not warrant that the service will be available to the user at all times;
+9.5	The service is subject to normal constraints of the respective carriers of data and information – UWC will, not be held liable for voice calls that fail or do not connect, for late or non-delivery of any data whether SMS, IP-data and so on;
+9.6	The UWC website and UDUBS-IT APP may contain links to some service providers and third parties which are governed by the terms and conditions of such service providers and third parties. UWC does not warrant the services of, nor does it make any representation about these services or the service providers and third parties;
+9.7	The use of the UDUBS-IT APP carries inherent risks – The user agrees to assume such risk and UWC shall have no liability of whatsoever nature if the user uses the UDUBS-IT APP, or any component thereof.
+\n\n
+10.	YOUR MOBILE DEVICE
+10.1	The user may be bound by various terms and conditions by the manufacturer of his/her mobile device and/or supplier of the operating system on his/her mobile device and/or service providers that provide services used in conjunction with his/her mobile device, including but not limited to GSM service providers - It is the user’s responsibility to be aware of these terms and conditions as the user’s use of UDUBS-IT APP may impact on these.
+10.2	Network service provider- or carrier–rates apply for telephony, data transmission (bi-directional), and text messaging and these charges are for the user’s account at all times – should the user be on a prepaid service, the onus is on the user to ensure that he/she has sufficient credit for telephony, data transmission (bi-directional), and text messaging.
+10.3	Should the user turn off, or if the GPS feature of the user’s mobile device is turned off, or if the UDUBS-IT APP has no access to the user’s mobile device’s GPS functionality, or if no GPS position is available, UDUBS-IT APP will be available to the user with limited functionality only.
+10.4	The UDUBS-IT APP requires voice, data and text functionality on the user’s  mobile device to be in working order (i.e. live data connection to internet and SMS connectivity to the network service provider) to function.
+10.5	The UDUBS-IT APP is available to handheld mobile devices running Android OS Operating Systems. UWC will use reasonable efforts to make the Application available at all times. However, the user acknowledges the UDUBS-IT APP is provided over the internet and mobile networks and so the quality and availability of the UDUBS-IT APP may be affected by factors outsider UWC’s reasonable control.
+10.6	UWC, its employees, directors associates and UWC’s affiliates do not accept any responsibility whatsoever for the unavailability of the UDUBS-IT APP or any difficulty or inability to download or access content or any other communication system failure which may result in the UDUBS-IT APP being unavailable.
+10.7	UWC will not be responsible for any support or maintenance for the UDUBS-IT APP.
+10.8	System Requirements - In order to use the UDUBS-IT APP, the user is required to have compatible mobile telephone or handheld device, internet access, and the necessary minimum specifications.
+10.9	The Software Requirements are as follows: an Android OS devices running a minimum Android 4 OS; Language: English.
+	The version of the UDUBS-IT APP software may be upgraded from time to time to add support for new functions and services.
+\n\n
+11.	TERMINATION
+11.1	UWC may terminate use of the UDUBS-IT APP at any time.
+11.2	Upon any termination, (a) the rights and licenses granted to the user herein shall terminate; (b) the user must cease all use of the UDUBS-IT APP and related Software.
+\n\n
+12.	LIMITATION OF LIABILITY
+12.1	In no event will UWC be liable for any direct, indirect, special, punitive, exemplary or consequential losses or damages of whatsoever kind arising out of the users use or access to the UDUBS-IT APP, including loss of profit or the like whether or not in the contemplation of the parties, whether based on breach of contract, tort (including negligence), product liability or otherwise.
+12.2	UWC will not be liable to the user for any damage or alteration to the user’s equipment, including but not limited to computer equipment, handheld device or mobile telephones as a result of the installation or use of the UDUBS-IT APP.
+12.3	Nothing in these terms and conditions shall exclude or limit UWC’s liability for death or personal injury caused by negligence or for fraud or fraudulent misrepresentation or any other liability which cannot be excluded or limited under applicable law.
+\n\n
+13.	DISCLAIMER OF WARRANTIES
+To the maximum extent permitted by law, and for the avoidance of doubt, UWC hereby disclaims all implied warranties with regard to the UDUBS-IT APP. The UDUBS-IT APP and software are provided “as is” and “as available” without warranty of any kind.
+\n\n
+14.	GOVERNING LAW
+The UDUBS-IT APP is hosted, controlled and operated from SA. All application terms and conditions will be governed by, construed and interpreted on accordance with the laws of South Africa. To the extent that a court has jurisdiction over any matter between the parties arising out of or in connection with these terms and conditions, a competent court in Western Cape, South Africa will have jurisdiction over the dispute.
+\n\n
+15.	COMPANY INFORMATION
+For all legal correspondence the domicilium citandi et executandi for the UWC:
+Robert Sobukwe Road,
+Bellville, 7535,
+Republic of South Africa
+\n\n
+info@uwc.ac.za | +27 21 959 2911
+\n\n
+Any queries related to these terms and conditions or any other matter in relation to the UDUBS-IT APP may be directed by to email ICSApplicationSupport@uwc.ac.za or the Service Desk maybe contacted or on 021 959 2000.
+Date : 2016/02/29
+" />
+</ScrollView>

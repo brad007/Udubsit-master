@@ -18,9 +18,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ionicframework.udubsit252887.BaseActivity;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
+import com.ionicframework.udubsit252887.Utils.Utils;
+import com.ionicframework.udubsit252887.models.Users;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,11 +45,6 @@ public class MainActivity extends BaseActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-      if (mFirebaseUser == null) {
-            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-        } else {
-            setupNav();
-        }
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         FIREBASE_USER = mFirebaseUser;
@@ -62,6 +63,11 @@ public class MainActivity extends BaseActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        if (Utils.getUserEmail() == null) {
+            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+        } else {
+            setupNav();
+        }
 
     }
 
@@ -70,13 +76,26 @@ public class MainActivity extends BaseActivity
         userDisplay = (ImageView) view.findViewById(R.id.user_display);
         username = (TextView) view.findViewById(R.id.username);
         userEmail = (TextView) view.findViewById(R.id.user_email);
-        if (mFirebaseUser != null) {
-            userEmail.setText(mFirebaseUser.getEmail());
-            username.setText(mFirebaseUser.getDisplayName());
-            Glide.with(MainActivity.this)
-                    .load(mFirebaseUser.getPhotoUrl())
-                    .into(userDisplay);
-        }
+
+        userEmail.setText(Utils.getUserEmail().replace(",","."));
+
+        FirebaseDatabase.getInstance().getReference(Constants.USERS_KEY)
+                .child(Utils.getUserEmail())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Users user = dataSnapshot.getValue(Users.class);
+                        username.setText(user.getUser());
+                        Glide.with(MainActivity.this)
+                                .load(user.getPhotoUri())
+                                .into(userDisplay);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     @Override

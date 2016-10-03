@@ -3,6 +3,8 @@ package com.ionicframework.udubsit252887.ui;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,12 +21,13 @@ import com.google.firebase.database.Query;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.Utils;
+import com.ionicframework.udubsit252887.dialogs.SchedualFilterDialog;
 import com.ionicframework.udubsit252887.models.Schedual;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SchedualFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class SchedualFragment extends Fragment implements SearchView.OnQueryTextListener, View.OnClickListener {
 
 
     private View rootView;
@@ -46,13 +49,14 @@ public class SchedualFragment extends Fragment implements SearchView.OnQueryText
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_schedual, container, false);
-
+        sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         initialiseScreen();
 
         return rootView;
     }
 
     private void initialiseScreen() {
+        rootView.findViewById(R.id.filter_image).setOnClickListener(this);
         mSchedualRecycler = (RecyclerView) rootView.findViewById(R.id.schedual_recycler);
         mSearchView = (SearchView) rootView.findViewById(R.id.search_view);
         mSearchView.setOnQueryTextListener(this);
@@ -106,6 +110,16 @@ public class SchedualFragment extends Fragment implements SearchView.OnQueryText
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.filter_image:
+                DialogFragment dialogFragment = new SchedualFilterDialog();
+                dialogFragment.show(getFragmentManager(), null);
+                break;
+        }
     }
 
     public static class SchedualHolder extends RecyclerView.ViewHolder {

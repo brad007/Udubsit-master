@@ -39,6 +39,7 @@ import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -80,7 +81,8 @@ public class AddEventActivity extends AppCompatActivity implements
  spinner.setAdapter(adapter);
      */
 
-    String[] ITEMS = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"};
+    String[] ITEMS = {"Academic", "Sports", "Culture", "Religion", "Social", "General", "Residence", "Academic Support"};
+
     ArrayAdapter<String> adapter;
     private MaterialSpinner spinner;
 
@@ -378,6 +380,7 @@ public class AddEventActivity extends AppCompatActivity implements
         addLocationView = (LinearLayout) findViewById(R.id.add_location_view);
         addImageView = (ImageView) findViewById(R.id.event_image);
 
+        Arrays.sort(ITEMS);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ITEMS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner = (MaterialSpinner) findViewById(R.id.spinner);

@@ -23,29 +23,29 @@
         android:background="@drawable/second_scrim" />
 
     <LinearLayout
-        android:layout_marginTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="32dp"
         android:orientation="vertical">
 
         <ImageView
-            android:src="@drawable/udubsit_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="64dp"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:src="@drawable/udubsit_icon" />
 
         <View
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageView
-            android:layout_gravity="center_horizontal"
             android:id="@+id/google_sign_in"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
             android:src="@drawable/google" />
 
@@ -56,6 +56,18 @@
             android:layout_marginBottom="64dp"
             android:gravity="center_horizontal"
             android:text="Sign In and register"
+            android:textColor="@android:color/white" />
+
+
+        <TextView
+            android:id="@+id/terms_and_conditions_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="64dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:gravity="center_horizontal"
+            android:text="By signing in and using the app, you agree to the T&amp;C's"
             android:textColor="@android:color/white" />
     </LinearLayout>
 
