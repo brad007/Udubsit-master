@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -38,6 +39,11 @@ public class MainActivity extends BaseActivity
     private TextView username;
     private NavigationView navigationView;
 
+    Bundle args = new Bundle();
+
+    private static final String ARG_PAGE_NUMBER =  "page_number";
+    private SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +54,24 @@ public class MainActivity extends BaseActivity
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         FIREBASE_USER = mFirebaseUser;
-        //Keeping track of which screen was last shown and displaying it on startup
+
+
+
+
+        if(args.getInt(ARG_PAGE_NUMBER) < 1){
+             sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+            int page = sp.getInt(ARG_PAGE_NUMBER, 1);
+            args.putInt(ARG_PAGE_NUMBER, page);
+        }
+        setPage(args.getInt(ARG_PAGE_NUMBER));
+
+        /*Keeping track of which screen was last shown and displaying it on startup
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         int position = sp.getInt(Constants.POSITION, 1);
         if (position == 1) {
             fragmentTransaction.replace(R.id.container, new GroupFragment()).commit();
         }
+        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -140,24 +158,61 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (id == R.id.nav_groups) {
-            fragmentTransaction.replace(R.id.container, new GroupFragment()).commit();
+            setPage(1);
         } else if (id == R.id.nav_points_of_interest) {
-            fragmentTransaction.replace(R.id.container, new POIFragment()).commit();
+            setPage(2);
         } else if (id == R.id.nav_schedule) {
-            fragmentTransaction.replace(R.id.container, new SchedualFragment()).commit();
+            setPage(3);
         } else if (id == R.id.nav_events) {
-            fragmentTransaction.replace(R.id.container, new MyEventsFragment()).commit();
+            setPage(4);
         } else if (id == R.id.nav_logout) {
             signOut();
             //startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         }else if(id == R.id.nav_adverts){
-            fragmentTransaction.replace(R.id.container, new MyAdsFragment()).commit();
+            setPage(5);
         }else if(id == R.id.nav_ikamva){
-            fragmentTransaction.replace(R.id.container, new IkamvaFragment()).commit();
+            setPage(6);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setPage(int page) {
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        switch (page){
+            case 1:
+                inflateFragment(new GroupFragment(), page);
+                break;
+            case 2:
+                inflateFragment(new POIFragment(), page);
+                break;
+            case 3:
+                inflateFragment(new SchedualFragment(), page);
+                break;
+            case 4:
+                inflateFragment(new MyEventsFragment(), page);
+                break;
+            case 5:
+                inflateFragment(new MyAdsFragment(), page);
+                break;
+            case 6:
+                inflateFragment(new IkamvaFragment(), page);
+                break;
+        }
+    }
+
+    private void inflateFragment(Fragment fragment, int page) {
+        args.putInt(ARG_PAGE_NUMBER, page);
+        SharedPreferences.Editor spe = sp.edit();
+        spe.putInt(ARG_PAGE_NUMBER, page).apply();
+        fragmentTransaction.replace(R.id.container, fragment).commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        sp.edit().putInt(ARG_PAGE_NUMBER, 1).apply();
+        super.onDestroy();
     }
 }

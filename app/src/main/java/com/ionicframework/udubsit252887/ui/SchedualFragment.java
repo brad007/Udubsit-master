@@ -60,6 +60,8 @@ public class SchedualFragment extends Fragment implements SearchView.OnQueryText
         mSchedualRecycler = (RecyclerView) rootView.findViewById(R.id.schedual_recycler);
         mSearchView = (SearchView) rootView.findViewById(R.id.search_view);
         mSearchView.setOnQueryTextListener(this);
+        filterView = (ImageView)rootView.findViewById(R.id.filter_image);
+        filterView.setOnClickListener(this);
     }
 
     @Override

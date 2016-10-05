@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "24525356875-j6ivvq6ebi4r4649i429mci427oq6cnl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.colab.udubsit",
+            "certificate_hash": "623229B58C15E88085222CBF804A10788B82BEC9"
+          }
+        },
+        {
+          "client_id": "24525356875-rq1o6nulnn8fufbosfaf8cuqorj1aq3m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.colab.udubsit",
+            "certificate_hash": "40CE9A3BD58134A49A3D2121B832C26B4A62E95D"
+          }
+        },
+        {
           "client_id": "24525356875-4df2jkpeluekgbfmhftd58tifd66t39m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -66,6 +82,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "24525356875-ve6rr2blkqubvumoj3sm695jpu09g14m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionicframework.udubsit252887",
+            "certificate_hash": "B59F45D65B87179E114C2DD799824B9AB3C07E78"
+          }
+        },
+        {
+          "client_id": "24525356875-gusnuh697jc2qbm5c30p9v7b5k8jm5th.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionicframework.udubsit252887",
+            "certificate_hash": "EBD06E6420930B552C43DC7A818258AD2C602FE7"
+          }
+        },
         {
           "client_id": "24525356875-vnc35tfrjqu1p9qh3fvi9q699h0j771q.apps.googleusercontent.com",
           "client_type": 1,
