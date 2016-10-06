@@ -16,12 +16,13 @@ import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.Utils;
 import com.ionicframework.udubsit252887.models.Event;
+import com.ionicframework.udubsit252887.ui.GroupDetailActivity.PlaceHolderFragment.EventHolder;
 
 public class MyEventsFragment extends Fragment {
 
     private View rootView;
     private RecyclerView mMyEventRecycler;
-    private FirebaseRecyclerAdapter<Event, GroupDetailActivity.PlaceHolderFragment.EventHolder> myEventAdapter;
+    private FirebaseRecyclerAdapter<Event, EventHolder> myEventAdapter;
 
     public MyEventsFragment() {
         // Required empty public constructor
@@ -52,18 +53,18 @@ public class MyEventsFragment extends Fragment {
     private void setupAdapter() {
 
 
-        myEventAdapter = new FirebaseRecyclerAdapter<Event, GroupDetailActivity.PlaceHolderFragment.EventHolder>(
+        myEventAdapter = new FirebaseRecyclerAdapter<Event, EventHolder>(
                 Event.class,
                 R.layout.item_layout_event,
-                GroupDetailActivity.PlaceHolderFragment.EventHolder.class,
+                EventHolder.class,
                 FirebaseDatabase.getInstance()
                         .getReference(Constants.MY_EVENTS_KEY)
-                        .child(Utils.getUserEmail().replace(".", ","))
+                        .child(Utils.getUserEmail())
                         .orderByChild("startDate")
                         .startAt(System.currentTimeMillis())
         ) {
             @Override
-            protected void populateViewHolder(final GroupDetailActivity.PlaceHolderFragment.EventHolder viewHolder, final Event model, int position) {
+            protected void populateViewHolder(final EventHolder viewHolder, final Event model, int position) {
                 final String event_image_url = model.getEventImageUrl();
                 Glide.with(getActivity())
                         .load(event_image_url)
