@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -50,15 +49,7 @@ public class RegisterActivity extends BaseActivity implements
         //Button listener
         findViewById(R.id.google_sign_in).setOnClickListener(this);
         findViewById(R.id.terms_and_conditions_textview).setOnClickListener(this);
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("24525356875-4hj2tuoq8b9itqclg0nu1ocogdnqsp2h.apps.googleusercontent.com")
-                .requestEmail()
-                .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
 
         mAuth = FirebaseAuth.getInstance();
 

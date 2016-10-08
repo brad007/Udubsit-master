@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -174,16 +175,65 @@ public class GroupDetailActivity extends AppCompatActivity {
     }
 
     private boolean createEvent() {
-        Intent intent = new Intent(GroupDetailActivity.this, AddEventActivity.class);
-        intent.putExtra(Constants.GROUP_ID_KEY, pushID);
-        startActivity(intent);
+        FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY)
+                .child(pushID)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getValue() != null) {
+                            ArrayList list = (ArrayList) dataSnapshot.getValue();
+                            if (list.contains(Utils.getUserEmail())) {
+                                Intent intent = new Intent(GroupDetailActivity.this, AddEventActivity.class);
+                                intent.putExtra(Constants.GROUP_ID_KEY, pushID);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        }else{
+                            Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
         return true;
     }
 
     private boolean createAdvert() {
-        Intent intent = new Intent(GroupDetailActivity.this, AddAdvertActivity.class);
-        intent.putExtra(Constants.PUSH_ID_KEY, pushID);
-        startActivity(intent);
+        FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY)
+                .child(pushID)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getValue() != null) {
+                            ArrayList list = (ArrayList) dataSnapshot.getValue();
+                            if (list.contains(Utils.getUserEmail())) {
+                                Intent intent = new Intent(GroupDetailActivity.this, AddAdvertActivity.class);
+                                intent.putExtra(Constants.PUSH_ID_KEY, pushID);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        }else{
+                            Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
         return true;
     }
 
@@ -304,7 +354,7 @@ public class GroupDetailActivity extends AppCompatActivity {
                             .load(model.getAdvertImageUrl())
                             .into(viewHolder.advertImage);
 
-                    Log.v("AdImage",model.getAdvertImageUrl());
+                    Log.v("AdImage", model.getAdvertImageUrl());
 
                     FirebaseDatabase.getInstance().getReference(Constants.USERS_KEY)
                             .child(model.getAdvertOwner().replace(".", ","))

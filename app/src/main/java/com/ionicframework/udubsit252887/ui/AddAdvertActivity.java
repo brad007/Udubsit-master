@@ -11,7 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -37,25 +40,9 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
     private Ads ads;
     private Calendar now;
     private Bitmap image;
-/*
 
-Advertisements
-Accommodation
-Special offers
-Menu
-Jobs (Part time)
-Jobs (Full time)
-Books (new)
-Books (2nd hand)
-Class notes
-Sporting goods
-Tutoring
-Miscellaneous
-
- */
-
-    String[]ITEMS = {"Advertisements", "Accomodation", "Special offers", "Menu", "Jobs(Part time)", "Jobs(Full time)", "Books (new)", "Books (second hand)",
-    "Class notes", "Sporting goods", "Tutoring", "Miscellaneous"};
+    String[] ITEMS = {"Advertisements", "Accomodation", "Special offers", "Menu", "Jobs(Part time)", "Jobs(Full time)", "Books (new)", "Books (second hand)",
+            "Class notes", "Sporting goods", "Tutoring", "Miscellaneous"};
 
 
     ArrayAdapter<String> adapter;
@@ -77,10 +64,10 @@ Miscellaneous
         findViewById(R.id.fab).setOnClickListener(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        findViewById(R.id.adImage).setOnClickListener(this);
-        findViewById(R.id.adPlace).setOnClickListener(this);
-        findViewById(R.id.adDate).setOnClickListener(this);
+        findViewById(R.id.end_date_text).setOnClickListener(this);
 
+        findViewById(R.id.ad_image).setOnClickListener(this);
+        findViewById(R.id.add_location_view).setOnClickListener(this);
         ads = new Ads();
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ITEMS);
@@ -94,12 +81,42 @@ Miscellaneous
         ads.setAdvertId(Utils.getPushId());
         ads.setAdvertGroupId(getIntent().getStringExtra(Constants.PUSH_ID_KEY));
 
-        EditText adTitle = (EditText) findViewById(R.id.adTitle);
+        AutoCompleteTextView adTitle = (AutoCompleteTextView) findViewById(R.id.adTitle);
         ads.setAdvertDescription(adTitle.getText().toString());
 
-        EditText adCost = (EditText) findViewById(R.id.adCost);
+        AutoCompleteTextView adCost = (AutoCompleteTextView) findViewById(R.id.adCost);
         ads.setAdvertCost(Double.parseDouble(adCost.getText().toString()));
         ads.setAdvertOwner(Utils.getUserEmail());
+
+        if(ads.getAdvertDue() == 0){
+            Toast.makeText(AddAdvertActivity.this, "No date set", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(image == null){
+            Toast.makeText(AddAdvertActivity.this, "No image set", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(ads.getAdvertCategory() == null){
+            Toast.makeText(AddAdvertActivity.this, "No category set", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(ads.getAdvertCost() == 0){
+            Toast.makeText(AddAdvertActivity.this, "No cost set", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(ads.getLatitude() == 0 && ads.getLongitude() == 0){
+            Toast.makeText(AddAdvertActivity.this, "No location set", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(ads.getAdvertDescription() == null){
+            Toast.makeText(AddAdvertActivity.this, "No title set", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         new UploadImage(ads).execute(image);
         finish();
@@ -108,20 +125,21 @@ Miscellaneous
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.adImage:
-                addImage();
+            case R.id.end_date_text:
+                addDate();
                 break;
-            case R.id.adPlace:
+            case R.id.add_location_view:
                 addPlace();
                 break;
-            case R.id.adDate:
-                addDate();
+            case R.id.ad_image:
+                addImage();
                 break;
             case R.id.fab:
                 createAd();
                 break;
         }
     }
+
 
     private void addDate() {
         com.wdullaer.materialdatetimepicker.date.DatePickerDialog datePickerDialog =
@@ -174,13 +192,35 @@ Miscellaneous
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case PLACE_PICKER_REQUEST:
+
+                    /*
+                    Log.v(TAG, "Place picker");
                     Place place = PlacePicker.getPlace(data, this);
+                    event.setAddress((String) place.getAddress());
+                    event.setLocationDescription((String) place.getName());
+
+                    TextView locationText = (TextView) findViewById(R.id.location_text);
+                    locationText.setText(event.getLocationDescription() + ", " + event.getAddress());
+
+                    Log.v(TAG, place.getLatLng().longitude + ":" + place.getLatLng().longitude);
+                    event.setLongitude(place.getLatLng().longitude);
+                    event.setLatitude(place.getLatLng().latitude);
+                     */
+                    Place place = PlacePicker.getPlace(data, this);
+
+                    String placeName = (String) place.getName();
+                    placeName += (", " + place.getAddress());
+
+                    TextView location = (TextView) findViewById(R.id.location_text);
+                    location.setText(placeName);
                     ads.setLatitude(place.getLatLng().latitude);
                     ads.setLongitude(place.getLatLng().longitude);
                     break;
                 case IMAGE_PICKER:
                     Bundle extras = data.getExtras();
                     image = extras.getParcelable("data");
+                    ImageView imageView = (ImageView) findViewById(R.id.ad_image);
+                    imageView.setImageBitmap(image);
                     break;
             }
         }
@@ -193,6 +233,9 @@ Miscellaneous
         date.setMonth(monthOfYear);
         date.setDate(dayOfMonth);
         ads.setAdvertDue(date.getTime());
+
+        TextView dateText = (TextView) findViewById(R.id.end_date_text);
+        dateText.setText(Utils.getDate(date.getTime()));
     }
 
     @Override

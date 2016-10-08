@@ -167,7 +167,7 @@ public class MainActivity extends BaseActivity
             setPage(4);
         } else if (id == R.id.nav_logout) {
             signOut();
-            //startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         }else if(id == R.id.nav_adverts){
             setPage(5);
         }else if(id == R.id.nav_ikamva){

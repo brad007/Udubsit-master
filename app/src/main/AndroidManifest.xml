@@ -14,6 +14,11 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".UdubsitApplication"
         android:allowBackup="true"
@@ -79,8 +84,7 @@
         <activity
             android:name=".ui.AddAdvertActivity"
             android:label="@string/title_activity_add_advert"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
