@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.fragments;
 
 
 import android.content.Intent;
@@ -21,6 +21,8 @@ import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.Utils;
 import com.ionicframework.udubsit252887.models.Ads;
 import com.ionicframework.udubsit252887.models.Users;
+import com.ionicframework.udubsit252887.ui.activities.ChatActivity;
+import com.ionicframework.udubsit252887.ui.activities.GroupDetailActivity;
 
 /**
  * A simple {@link Fragment} subclass.

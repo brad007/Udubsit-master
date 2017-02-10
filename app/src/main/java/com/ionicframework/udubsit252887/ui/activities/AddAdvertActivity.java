@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,15 +37,24 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
 
     private static final int PLACE_PICKER_REQUEST = 1;
     private static final int IMAGE_PICKER = 2;
+    String[] ITEMS = {
+            "Advertisements",
+            "Accomodation",
+            "Special offers",
+            "Menu",
+            "Jobs(Part time)",
+            "Jobs(Full time)",
+            "Books (new)",
+            "Books (second hand)",
+            "Class notes",
+            "Sporting goods",
+            "Tutoring",
+            "Miscellaneous"
+    };
+    ArrayAdapter<String> adapter;
     private Ads ads;
     private Calendar now;
     private Bitmap image;
-
-    String[] ITEMS = {"Advertisements", "Accomodation", "Special offers", "Menu", "Jobs(Part time)", "Jobs(Full time)", "Books (new)", "Books (second hand)",
-            "Class notes", "Sporting goods", "Tutoring", "Miscellaneous"};
-
-
-    ArrayAdapter<String> adapter;
     private MaterialSpinner spinner;
 
 
@@ -88,32 +97,32 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         ads.setAdvertCost(Double.parseDouble(adCost.getText().toString()));
         ads.setAdvertOwner(Utils.getUserEmail());
 
-        if(ads.getAdvertDue() == 0){
+        if (ads.getAdvertDue() == 0) {
             Toast.makeText(AddAdvertActivity.this, "No date set", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(image == null){
+        if (image == null) {
             Toast.makeText(AddAdvertActivity.this, "No image set", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(ads.getAdvertCategory() == null){
+        if (ads.getAdvertCategory() == null) {
             Toast.makeText(AddAdvertActivity.this, "No category set", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(ads.getAdvertCost() == 0){
+        if (ads.getAdvertCost() == 0) {
             Toast.makeText(AddAdvertActivity.this, "No cost set", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(ads.getLatitude() == 0 && ads.getLongitude() == 0){
+        if (ads.getLatitude() == 0 && ads.getLongitude() == 0) {
             Toast.makeText(AddAdvertActivity.this, "No location set", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(ads.getAdvertDescription() == null){
+        if (ads.getAdvertDescription() == null) {
             Toast.makeText(AddAdvertActivity.this, "No title set", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -159,9 +168,9 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
             startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
         } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         }
     }

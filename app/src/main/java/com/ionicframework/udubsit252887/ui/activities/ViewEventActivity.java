@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -41,12 +41,12 @@ import com.google.firebase.storage.StorageReference;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.Utils;
-import com.ionicframework.udubsit252887.dialogs.EventOptionsDialog;
-import com.ionicframework.udubsit252887.dialogs.RSVPDialog;
 import com.ionicframework.udubsit252887.models.Comment;
 import com.ionicframework.udubsit252887.models.Event;
 import com.ionicframework.udubsit252887.models.EventImageUrl;
 import com.ionicframework.udubsit252887.models.Users;
+import com.ionicframework.udubsit252887.ui.dialogs.EventOptionsDialog;
+import com.ionicframework.udubsit252887.ui.dialogs.RSVPDialog;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -417,7 +417,7 @@ public class ViewEventActivity extends AppCompatActivity {
                     );
                     Date endDate = new Date(event.getEndDate());
                     endDateView.setText(
-                            Utils.getDay(endDate.getDay()) + ", " + Utils.getMonth(endDate.getMonth()) + " " + endDate.getDate() + ", " + endDate   .getYear()
+                            Utils.getDay(endDate.getDay()) + ", " + Utils.getMonth(endDate.getMonth()) + " " + endDate.getDate() + ", " + endDate.getYear()
                     );
 
                     Date d = new Date(event.getStartDate());

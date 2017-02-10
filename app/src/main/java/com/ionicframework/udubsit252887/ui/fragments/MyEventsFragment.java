@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,8 @@ import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.Utils;
 import com.ionicframework.udubsit252887.models.Event;
-import com.ionicframework.udubsit252887.ui.GroupDetailActivity.PlaceHolderFragment.EventHolder;
+import com.ionicframework.udubsit252887.ui.activities.GroupDetailActivity.PlaceHolderFragment.EventHolder;
+import com.ionicframework.udubsit252887.ui.activities.ViewEventActivity;
 
 public class MyEventsFragment extends Fragment {
 

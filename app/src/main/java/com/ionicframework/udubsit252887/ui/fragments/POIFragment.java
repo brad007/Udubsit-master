@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.fragments;
 
 
 import android.content.Intent;

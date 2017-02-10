@@ -31,7 +31,7 @@ public class BaseActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth != null) {
+        if (mAuth != null) {
             mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         }
 

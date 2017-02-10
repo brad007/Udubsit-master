@@ -1,6 +1,7 @@
 package com.ionicframework.udubsit252887.Utils;
 
 import android.content.Context;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +17,16 @@ import java.util.Date;
  * Created by CoLab on 2016/05/11.
  */
 public class Utils {
+
+    public static void showToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showToast(Context context, @StringRes int message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+
     public static String getPushId() {
         String url = FirebaseDatabase.getInstance().getReference(Constants.EVENTS_KEY).push().toString();
         String[] arr = url.split("/");

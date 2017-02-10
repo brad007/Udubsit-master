@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -53,7 +53,8 @@ public class AddEventActivity extends AppCompatActivity implements
     static final int PLACE_PICKER_REQUEST = 2;
     private static final String TAG = AddEventActivity.class.getSimpleName();
     private static final int IMAGE_PICKER = 1;
-
+    String[] ITEMS = {"Academic", "Sports", "Culture", "Religion", "Social", "General", "Residence", "Academic Support"};
+    ArrayAdapter<String> adapter;
     private EditText eventTitleView;
     private Switch allDaySwitch;
     private TextView startDateView;
@@ -62,7 +63,6 @@ public class AddEventActivity extends AppCompatActivity implements
     private TextView endTimeView;
     private LinearLayout addLocationView;
     private ImageView addImageView;
-
     private boolean update;
     private String groupId;
     private String eventGroup;
@@ -70,8 +70,6 @@ public class AddEventActivity extends AppCompatActivity implements
     private Calendar now;
     private Event event;
     private Date startDate = new Date(System.currentTimeMillis());
-    private Date endDate = new Date(System.currentTimeMillis());
-    private Bitmap image;
 
     /*
     String[] ITEMS = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"};
@@ -80,16 +78,15 @@ public class AddEventActivity extends AppCompatActivity implements
  spinner = (MaterialSpinner) findViewById(R.id.spinner);
  spinner.setAdapter(adapter);
      */
-
-    String[] ITEMS = {"Academic", "Sports", "Culture", "Religion", "Social", "General", "Residence", "Academic Support"};
-
-    ArrayAdapter<String> adapter;
+    private Date endDate = new Date(System.currentTimeMillis());
+    private Bitmap image;
     private MaterialSpinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -123,51 +120,54 @@ public class AddEventActivity extends AppCompatActivity implements
 
         if (event.getTitle() == null) {
             event.setTitle("");
-        }
-        if (event.getDescription() == null) {
-            event.setDescription("");
-        }
-        if (event.getLongitude() == 0) {
-            Log.v(TAG, "No Location");
-            return;
-        }
-        if (event.getEndDate() == 0) {
-            Log.v(TAG, "No end date");
-            return;
-        }
-        if (event.getStartDate() == 0) {
-            Log.v(TAG, "No start date");
-            return;
-        }
-        if (event.getTitle().length() <= 10 || event.getTitle().length() >= 30) {
-
-            Log.v(TAG, "invalid length");
-            return;
-        }
-        if (event.getDescription().length() <= 10 || event.getDescription().length() >= 500) {
-
-            Log.v(TAG, "invalid d_length");
-            //    return;
-        }
-        if (image == null) {
-            Log.v(TAG, "No image");
-            return;
-        }
-        if (event.getCategory() == null) {
-            Log.v(TAG, "No category");
-            //      return;
-        }
-        event.setGroup("Academic Info");
-        event.setNumOfPeople(0L);
-        if (!update) {
-            event.setEventId(Utils.getPushId());
-            UploadImage uploadImage = new UploadImage(event);
-            uploadImage.execute(image);
-            finish();
+        } else if (event.getTitle().length() < 10) {
+            Utils.showToast(AddEventActivity.this, "Title needs to be 10 characters long");
         } else {
-            FirebaseDatabase.getInstance().getReference(Constants.EVENTS_KEY)
-                    .child(groupId).child(eventId).setValue(event);
-            finish();
+            if (event.getDescription() == null) {
+                event.setDescription("");
+            }
+            if (event.getLongitude() == 0) {
+                Log.v(TAG, "No Location");
+                return;
+            }
+            if (event.getEndDate() == 0) {
+                Log.v(TAG, "No end date");
+                return;
+            }
+            if (event.getStartDate() == 0) {
+                Log.v(TAG, "No start date");
+                return;
+            }
+            if (event.getTitle().length() <= 10 || event.getTitle().length() >= 30) {
+
+                Log.v(TAG, "invalid length");
+                return;
+            }
+            if (event.getDescription().length() <= 10 || event.getDescription().length() >= 500) {
+
+                Log.v(TAG, "invalid d_length");
+                //    return;
+            }
+            if (image == null) {
+                Log.v(TAG, "No image");
+                return;
+            }
+            if (event.getCategory() == null) {
+                Log.v(TAG, "No category");
+                //      return;
+            }
+            event.setGroup("Academic Info");
+            event.setNumOfPeople(0L);
+            if (!update) {
+                event.setEventId(Utils.getPushId());
+                UploadImage uploadImage = new UploadImage(event);
+                uploadImage.execute(image);
+                finish();
+            } else {
+                FirebaseDatabase.getInstance().getReference(Constants.EVENTS_KEY)
+                        .child(groupId).child(eventId).setValue(event);
+                finish();
+            }
         }
     }
 

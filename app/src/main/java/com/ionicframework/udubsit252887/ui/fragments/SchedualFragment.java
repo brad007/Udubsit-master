@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.fragments;
 
 
 import android.content.SharedPreferences;
@@ -21,8 +21,8 @@ import com.google.firebase.database.Query;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.Utils;
-import com.ionicframework.udubsit252887.dialogs.SchedualFilterDialog;
 import com.ionicframework.udubsit252887.models.Schedual;
+import com.ionicframework.udubsit252887.ui.dialogs.SchedualFilterDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +60,7 @@ public class SchedualFragment extends Fragment implements SearchView.OnQueryText
         mSchedualRecycler = (RecyclerView) rootView.findViewById(R.id.schedual_recycler);
         mSearchView = (SearchView) rootView.findViewById(R.id.search_view);
         mSearchView.setOnQueryTextListener(this);
-        filterView = (ImageView)rootView.findViewById(R.id.filter_image);
+        filterView = (ImageView) rootView.findViewById(R.id.filter_image);
         filterView.setOnClickListener(this);
     }
 

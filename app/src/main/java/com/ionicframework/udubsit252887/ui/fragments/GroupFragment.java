@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.fragments;
 
 
 import android.content.Intent;
@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.models.Groups;
+import com.ionicframework.udubsit252887.ui.activities.GroupDetailActivity;
 
 /**
  * A simple {@link Fragment} subclass.

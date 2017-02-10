@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.dialogs;
+package com.ionicframework.udubsit252887.ui.dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

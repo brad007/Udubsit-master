@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,11 +36,11 @@ import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.Utils;
 import com.ionicframework.udubsit252887.Utils.managers.GroupManager;
-import com.ionicframework.udubsit252887.dialogs.TaglineDialogs;
 import com.ionicframework.udubsit252887.models.Ads;
 import com.ionicframework.udubsit252887.models.Event;
 import com.ionicframework.udubsit252887.models.Person;
 import com.ionicframework.udubsit252887.models.Users;
+import com.ionicframework.udubsit252887.ui.dialogs.TaglineDialogs;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -180,7 +180,7 @@ public class GroupDetailActivity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getValue() != null) {
+                        if (dataSnapshot.getValue() != null) {
                             ArrayList list = (ArrayList) dataSnapshot.getValue();
                             if (list.contains(Utils.getUserEmail())) {
                                 Intent intent = new Intent(GroupDetailActivity.this, AddEventActivity.class);
@@ -190,7 +190,7 @@ public class GroupDetailActivity extends AppCompatActivity {
                                 Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
                                         .show();
                             }
-                        }else{
+                        } else {
                             Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
                                     .show();
                         }
@@ -211,7 +211,7 @@ public class GroupDetailActivity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getValue() != null) {
+                        if (dataSnapshot.getValue() != null) {
                             ArrayList list = (ArrayList) dataSnapshot.getValue();
                             if (list.contains(Utils.getUserEmail())) {
                                 Intent intent = new Intent(GroupDetailActivity.this, AddAdvertActivity.class);
@@ -221,7 +221,7 @@ public class GroupDetailActivity extends AppCompatActivity {
                                 Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
                                         .show();
                             }
-                        }else{
+                        } else {
                             Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
                                     .show();
                         }
@@ -442,14 +442,14 @@ public class GroupDetailActivity extends AppCompatActivity {
 
         public static class AdvertHolder extends RecyclerView.ViewHolder {
 
-            ImageView advertImage;
-            TextView advertDescription;
-            TextView advertCost;
-            TextView advertDue;
-            TextView advertOwnerUsername;
-            TextView advertOwnerEmail;
-            CircleImageView advertOwnerDisplay;
-            LinearLayout contactLayout;
+            public static ImageView advertImage;
+            public static TextView advertDescription;
+            public static TextView advertCost;
+            public static TextView advertDue;
+            public static TextView advertOwnerUsername;
+            public static TextView advertOwnerEmail;
+            public static CircleImageView advertOwnerDisplay;
+            public static LinearLayout contactLayout;
 
             public AdvertHolder(View itemView) {
                 super(itemView);

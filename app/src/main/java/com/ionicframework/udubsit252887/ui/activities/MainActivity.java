@@ -1,16 +1,20 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,20 +32,26 @@ import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.Utils;
 import com.ionicframework.udubsit252887.models.Users;
+import com.ionicframework.udubsit252887.ui.fragments.GroupFragment;
+import com.ionicframework.udubsit252887.ui.fragments.IkamvaFragment;
+import com.ionicframework.udubsit252887.ui.fragments.MyAdsFragment;
+import com.ionicframework.udubsit252887.ui.fragments.MyEventsFragment;
+import com.ionicframework.udubsit252887.ui.fragments.POIFragment;
+import com.ionicframework.udubsit252887.ui.fragments.SchedualFragment;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String ARG_PAGE_NUMBER = "page_number";
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final int REQUEST_PERMISSIONS = 1;
     public static FirebaseUser FIREBASE_USER;
+    Bundle args = new Bundle();
     private FragmentTransaction fragmentTransaction;
     private ImageView userDisplay;
     private TextView userEmail;
     private TextView username;
     private NavigationView navigationView;
-
-    Bundle args = new Bundle();
-
-    private static final String ARG_PAGE_NUMBER =  "page_number";
     private SharedPreferences sp;
 
     @Override
@@ -51,15 +61,27 @@ public class MainActivity extends BaseActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.i(TAG, "Has No permissions. Requesting....");
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_CALENDAR
+                    },
+                    REQUEST_PERMISSIONS);
+
+        }
+
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         FIREBASE_USER = mFirebaseUser;
 
 
-
-
-        if(args.getInt(ARG_PAGE_NUMBER) < 1){
-             sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        if (args.getInt(ARG_PAGE_NUMBER) < 1) {
+            sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
             int page = sp.getInt(ARG_PAGE_NUMBER, 1);
             args.putInt(ARG_PAGE_NUMBER, page);
         }
@@ -95,7 +117,7 @@ public class MainActivity extends BaseActivity
         username = (TextView) view.findViewById(R.id.username);
         userEmail = (TextView) view.findViewById(R.id.user_email);
 
-        userEmail.setText(Utils.getUserEmail().replace(",","."));
+        userEmail.setText(Utils.getUserEmail().replace(",", "."));
 
         FirebaseDatabase.getInstance().getReference(Constants.USERS_KEY)
                 .child(Utils.getUserEmail())
@@ -168,9 +190,9 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_logout) {
             signOut();
             startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-        }else if(id == R.id.nav_adverts){
+        } else if (id == R.id.nav_adverts) {
             setPage(5);
-        }else if(id == R.id.nav_ikamva){
+        } else if (id == R.id.nav_ikamva) {
             setPage(6);
         }
 
@@ -181,7 +203,7 @@ public class MainActivity extends BaseActivity
 
     public void setPage(int page) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        switch (page){
+        switch (page) {
             case 1:
                 inflateFragment(new GroupFragment(), page);
                 break;

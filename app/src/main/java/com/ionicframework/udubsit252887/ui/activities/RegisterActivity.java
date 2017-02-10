@@ -1,4 +1,4 @@
-package com.ionicframework.udubsit252887.ui;
+package com.ionicframework.udubsit252887.ui.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -28,8 +28,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.ionicframework.udubsit252887.BaseActivity;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
-import com.ionicframework.udubsit252887.dialogs.TermsAndConditionDialog;
+import com.ionicframework.udubsit252887.Utils.Utils;
 import com.ionicframework.udubsit252887.models.Users;
+import com.ionicframework.udubsit252887.ui.dialogs.TermsAndConditionDialog;
 
 public class RegisterActivity extends BaseActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -106,6 +107,9 @@ public class RegisterActivity extends BaseActivity implements
             } else {
                 progressDialog.dismiss();
             }
+        } else {
+            progressDialog.dismiss();
+            Utils.showToast(this, "!RESULT_OK");
         }
     }
 
