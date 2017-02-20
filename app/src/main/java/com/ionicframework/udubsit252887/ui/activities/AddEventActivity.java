@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -39,6 +40,7 @@ import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -87,6 +89,16 @@ public class AddEventActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
 
+        //set start & enddate default to date today
+//        TextView startdate= (TextView) findViewById(R.id.start_date_text);
+//        SimpleDateFormat dfDate_day= new SimpleDateFormat("dd/MM/yyyy");
+//        Calendar c = Calendar.getInstance();
+//        String data=dfDate_day.format(c.getTime());
+//        Log.d("DateTime", data);
+//        startdate.setText(data);
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -127,32 +139,38 @@ public class AddEventActivity extends AppCompatActivity implements
                 event.setDescription("");
             }
             if (event.getLongitude() == 0) {
+                Toast.makeText(this, "No location selected",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No Location");
                 return;
             }
             if (event.getEndDate() == 0) {
+                Toast.makeText(this, "No end date",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No end date");
                 return;
             }
             if (event.getStartDate() == 0) {
+                Toast.makeText(this, "No start date",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No start date");
                 return;
             }
             if (event.getTitle().length() <= 10 || event.getTitle().length() >= 30) {
-
+                Toast.makeText(this, "invalid length",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "invalid length");
                 return;
             }
             if (event.getDescription().length() <= 10 || event.getDescription().length() >= 500) {
 
+                Toast.makeText(this, event.getDescription().toString(),Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "invalid d_length");
                 //    return;
             }
             if (image == null) {
+                Toast.makeText(this, "No image selected",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No image");
                 return;
             }
             if (event.getCategory() == null) {
+                Toast.makeText(this, "No category selected",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No category");
                 //      return;
             }
@@ -190,10 +208,9 @@ public class AddEventActivity extends AppCompatActivity implements
                     break;
                 case IMAGE_PICKER:
                     Log.v(TAG, "image picker");
-                    Bundle extras = data.getExtras();
-                    if (extras != null) {
-                        image = extras.getParcelable("data");
-                        addImageView.setImageBitmap(image);
+                    Uri imageURI = data.getData();
+                    if (imageURI != null) {
+                        addImageView.setImageURI(imageURI);
                     }
                     break;
                 default:
@@ -251,6 +268,7 @@ public class AddEventActivity extends AppCompatActivity implements
         String pictureDirectoruPath = pictureDirectory.getPath();
 
         Uri data = Uri.parse(pictureDirectoruPath);
+        Log.v("ImagePath",data.toString());
 
         photoPickerIntent.setDataAndType(data, "image/*");
         photoPickerIntent.putExtra("crop", "true");
@@ -260,7 +278,7 @@ public class AddEventActivity extends AppCompatActivity implements
 
         photoPickerIntent.putExtra("outputX", 280);
         photoPickerIntent.putExtra("outputX", 280);
-
+        Log.v("Photopicerintent",photoPickerIntent.getExtras().toString());
         startActivityForResult(photoPickerIntent, IMAGE_PICKER);
     }
 
