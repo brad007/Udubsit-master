@@ -107,6 +107,7 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
             return;
         }
 
+        //Develop branch
         if (ads.getAdvertCategory() == null) {
             Toast.makeText(AddAdvertActivity.this, "No category set", Toast.LENGTH_SHORT).show();
             return;
