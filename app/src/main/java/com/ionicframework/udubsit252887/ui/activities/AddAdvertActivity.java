@@ -85,7 +85,7 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
     }
-
+//  merge
     private void createAd() {
         ads.setAdvertId(Utils.getPushId());
         ads.setAdvertGroupId(getIntent().getStringExtra(Constants.PUSH_ID_KEY));
