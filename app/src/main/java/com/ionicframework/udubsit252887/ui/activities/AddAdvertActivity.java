@@ -59,6 +59,7 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
     private Bitmap image;
     private MaterialSpinner spinner;
 
+//    merge
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
