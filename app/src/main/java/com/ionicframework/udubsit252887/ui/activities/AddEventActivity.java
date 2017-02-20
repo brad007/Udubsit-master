@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,6 +41,8 @@ import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -158,12 +161,6 @@ public class AddEventActivity extends AppCompatActivity implements
                 Log.v(TAG, "invalid length");
                 return;
             }
-            if (event.getDescription().length() <= 10 || event.getDescription().length() >= 500) {
-
-                Toast.makeText(this, event.getDescription().toString(),Toast.LENGTH_LONG ).show();
-                Log.v(TAG, "invalid d_length");
-                //    return;
-            }
             if (image == null) {
                 Toast.makeText(this, "No image selected",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No image");
@@ -180,11 +177,14 @@ public class AddEventActivity extends AppCompatActivity implements
                 event.setEventId(Utils.getPushId());
                 UploadImage uploadImage = new UploadImage(event);
                 uploadImage.execute(image);
+
                 finish();
+                Toast.makeText(this,"Add Event Succesfull",Toast.LENGTH_LONG).show();
             } else {
                 FirebaseDatabase.getInstance().getReference(Constants.EVENTS_KEY)
                         .child(groupId).child(eventId).setValue(event);
                 finish();
+                Toast.makeText(this,"Add Event Succesfull",Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -210,6 +210,12 @@ public class AddEventActivity extends AppCompatActivity implements
                     Log.v(TAG, "image picker");
                     Uri imageURI = data.getData();
                     if (imageURI != null) {
+
+                        try {
+                            image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageURI);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         addImageView.setImageURI(imageURI);
                     }
                     break;

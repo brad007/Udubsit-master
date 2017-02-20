@@ -139,6 +139,14 @@
                 app:ms_hint="Categories"
                 android:layout_marginTop="16dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Image"
+                android:textColor="@android:color/black"
+                android:paddingTop="15dp"
+                android:textSize="15dp"/>
+
 
             <ImageView
                 android:id="@+id/event_image"
@@ -147,7 +155,8 @@
                 android:layout_marginTop="24dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/image_placeholder" />
+                android:src="@drawable/image_placeholder"
+                android:layout_marginBottom="50px"/>
 
         </LinearLayout>
     </ScrollView>
