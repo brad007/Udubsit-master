@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.ionicframework.udubsit252887.models.Ads;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -129,6 +131,7 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
 
         new UploadImage(ads).execute(image);
         finish();
+        Toast.makeText(this,"Advert created",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -226,13 +229,22 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
                     ads.setLongitude(place.getLatLng().longitude);
                     break;
                 case IMAGE_PICKER:
-                    Bundle extras = data.getExtras();
-                    image = extras.getParcelable("data");
-                    ImageView imageView = (ImageView) findViewById(R.id.ad_image);
-                    imageView.setImageBitmap(image);
+                    Uri imageURI = data.getData();
+
+                    if (imageURI != null) {
+
+                        try {
+                            image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageURI);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        ImageView imageView = (ImageView) findViewById(R.id.ad_image);
+                        imageView.setImageURI(imageURI);
+                    }
                     break;
+
             }
-        }
+            }
     }
 
     @Override
