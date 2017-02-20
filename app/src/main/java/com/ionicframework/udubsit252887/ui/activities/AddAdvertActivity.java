@@ -106,7 +106,7 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(AddAdvertActivity.this, "No image set", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        //merge
         if (ads.getAdvertCategory() == null) {
             Toast.makeText(AddAdvertActivity.this, "No category set", Toast.LENGTH_SHORT).show();
             return;
