@@ -3,6 +3,7 @@ package com.ionicframework.udubsit252887.ui.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -393,7 +395,9 @@ public class AddEventActivity extends AppCompatActivity implements
 
         allDaySwitch = (Switch) findViewById(R.id.all_day_switch);
         eventTitleView = (EditText) findViewById(R.id.event_title_view);
-        eventTitleView.setError("10 - 35 characters");
+//        eventTitleView.setError("10 - 35 characters");
+        eventTitleView.setError(Html.fromHtml("<font color='#ffffff'>10-35 characters</font>"));
+//        eventTitleView.setTextColor(Color.WHITE);
 
         startDateView = (TextView) findViewById(R.id.start_date_text);
         startTimeView = (TextView) findViewById(R.id.start_time_text);
