@@ -3,12 +3,15 @@ package com.ionicframework.udubsit252887.ui.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -39,6 +43,9 @@ import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -87,6 +94,16 @@ public class AddEventActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
 
+        //set start & enddate default to date today
+//        TextView startdate= (TextView) findViewById(R.id.start_date_text);
+//        SimpleDateFormat dfDate_day= new SimpleDateFormat("dd/MM/yyyy");
+//        Calendar c = Calendar.getInstance();
+//        String data=dfDate_day.format(c.getTime());
+//        Log.d("DateTime", data);
+//        startdate.setText(data);
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -127,32 +144,32 @@ public class AddEventActivity extends AppCompatActivity implements
                 event.setDescription("");
             }
             if (event.getLongitude() == 0) {
+                Toast.makeText(this, "No location selected",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No Location");
                 return;
             }
             if (event.getEndDate() == 0) {
+                Toast.makeText(this, "No end date",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No end date");
                 return;
             }
             if (event.getStartDate() == 0) {
+                Toast.makeText(this, "No start date",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No start date");
                 return;
             }
             if (event.getTitle().length() <= 10 || event.getTitle().length() >= 30) {
-
+                Toast.makeText(this, "invalid length",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "invalid length");
                 return;
             }
-            if (event.getDescription().length() <= 10 || event.getDescription().length() >= 500) {
-
-                Log.v(TAG, "invalid d_length");
-                //    return;
-            }
             if (image == null) {
+                Toast.makeText(this, "No image selected",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No image");
                 return;
             }
             if (event.getCategory() == null) {
+                Toast.makeText(this, "No category selected",Toast.LENGTH_LONG ).show();
                 Log.v(TAG, "No category");
                 //      return;
             }
@@ -162,11 +179,14 @@ public class AddEventActivity extends AppCompatActivity implements
                 event.setEventId(Utils.getPushId());
                 UploadImage uploadImage = new UploadImage(event);
                 uploadImage.execute(image);
+
                 finish();
+                Toast.makeText(this,"Add Event Succesfull",Toast.LENGTH_LONG).show();
             } else {
                 FirebaseDatabase.getInstance().getReference(Constants.EVENTS_KEY)
                         .child(groupId).child(eventId).setValue(event);
                 finish();
+                Toast.makeText(this,"Add Event Succesfull",Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -190,10 +210,15 @@ public class AddEventActivity extends AppCompatActivity implements
                     break;
                 case IMAGE_PICKER:
                     Log.v(TAG, "image picker");
-                    Bundle extras = data.getExtras();
-                    if (extras != null) {
-                        image = extras.getParcelable("data");
-                        addImageView.setImageBitmap(image);
+                    Uri imageURI = data.getData();
+                    if (imageURI != null) {
+
+                        try {
+                            image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageURI);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        addImageView.setImageURI(imageURI);
                     }
                     break;
                 default:
@@ -251,6 +276,7 @@ public class AddEventActivity extends AppCompatActivity implements
         String pictureDirectoruPath = pictureDirectory.getPath();
 
         Uri data = Uri.parse(pictureDirectoruPath);
+        Log.v("ImagePath",data.toString());
 
         photoPickerIntent.setDataAndType(data, "image/*");
         photoPickerIntent.putExtra("crop", "true");
@@ -260,7 +286,7 @@ public class AddEventActivity extends AppCompatActivity implements
 
         photoPickerIntent.putExtra("outputX", 280);
         photoPickerIntent.putExtra("outputX", 280);
-
+        Log.v("Photopicerintent",photoPickerIntent.getExtras().toString());
         startActivityForResult(photoPickerIntent, IMAGE_PICKER);
     }
 
@@ -369,7 +395,9 @@ public class AddEventActivity extends AppCompatActivity implements
 
         allDaySwitch = (Switch) findViewById(R.id.all_day_switch);
         eventTitleView = (EditText) findViewById(R.id.event_title_view);
-        eventTitleView.setError("10 - 35 characters");
+//        eventTitleView.setError("10 - 35 characters");
+        eventTitleView.setError(Html.fromHtml("<font color='#ffffff'>10-35 characters</font>"));
+//        eventTitleView.setTextColor(Color.WHITE);
 
         startDateView = (TextView) findViewById(R.id.start_date_text);
         startTimeView = (TextView) findViewById(R.id.start_time_text);
