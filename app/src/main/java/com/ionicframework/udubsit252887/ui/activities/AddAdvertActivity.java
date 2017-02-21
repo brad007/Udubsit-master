@@ -73,7 +73,7 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        findViewById(R.id.fab).setOnClickListener(this);
+//        findViewById(R.id.fab).setOnClickListener(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.end_date_text).setOnClickListener(this);
