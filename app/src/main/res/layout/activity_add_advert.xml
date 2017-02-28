@@ -20,12 +20,12 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <EditText
-            android:id="@+id/event_title_view"
+            android:id="@+id/adTitle"
             android:textColor="@android:color/white"
             android:layout_margin="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter title"/>
+            android:hint="Enter Advert Title"/>
     </android.support.design.widget.AppBarLayout>
 
     <!--<android.support.design.widget.FloatingActionButton-->

@@ -9,10 +9,14 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +39,10 @@ import java.util.Date;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
-public class AddAdvertActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+public class AddAdvertActivity extends AppCompatActivity implements View.OnClickListener,
+        DatePickerDialog.OnDateSetListener,
+        AdapterView.OnItemClickListener,
+        AdapterView.OnItemSelectedListener {
 
     private static final int PLACE_PICKER_REQUEST = 1;
     private static final int IMAGE_PICKER = 2;
@@ -93,10 +100,10 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         ads.setAdvertId(Utils.getPushId());
         ads.setAdvertGroupId(getIntent().getStringExtra(Constants.PUSH_ID_KEY));
 
-        AutoCompleteTextView adTitle = (AutoCompleteTextView) findViewById(R.id.adTitle);
+        EditText adTitle = (EditText) findViewById(R.id.adTitle);
         ads.setAdvertDescription(adTitle.getText().toString());
 
-        AutoCompleteTextView adCost = (AutoCompleteTextView) findViewById(R.id.adCost);
+        EditText adCost = (EditText) findViewById(R.id.adCost);
         ads.setAdvertCost(Double.parseDouble(adCost.getText().toString()));
         ads.setAdvertOwner(Utils.getUserEmail());
 
@@ -242,6 +249,7 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
                         ImageView imageView = (ImageView) findViewById(R.id.ad_image);
                         imageView.setImageURI(imageURI);
                     }
+
                     break;
 
             }
@@ -276,5 +284,22 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
 
         String item = (String) adapterView.getSelectedItem();
         ads.setAdvertCategory(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add_event, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add_event:
+                Log.v("AddAdvertActivity", "add event");
+                createAd();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
