@@ -52,7 +52,7 @@ public class POIFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-
+//merge
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
