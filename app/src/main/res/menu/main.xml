@@ -6,4 +6,10 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item android:id="@+id/search"
+        android:title="Search Locations"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:visible="false"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView"/>
 </menu>
