@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -115,6 +116,7 @@ public class AddEventActivity extends AppCompatActivity implements
         event = new Event();
         work();
         now = Calendar.getInstance();
+
 
 
         update = intent.getBooleanExtra(Constants.UPDATE, false);
@@ -434,6 +436,8 @@ public class AddEventActivity extends AppCompatActivity implements
                 Log.v(TAG, "add event");
                 sendEvent();
                 return true;
+            case R.drawable.ic_arrow_back_black_24dp:
+                Log.d("BackPressed","True");
         }
         return super.onOptionsItemSelected(item);
     }

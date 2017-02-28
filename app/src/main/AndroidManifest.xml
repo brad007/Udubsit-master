@@ -65,7 +65,8 @@
             android:name=".ui.activities.AddEventActivity"
             android:label="@string/title_activity_add_event"
             android:parentActivityName=".ui.activities.GroupDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ionicframework.udubsit252887.ui.activities.GroupDetailActivity" />
