@@ -364,6 +364,7 @@ public class AddEventActivity extends AppCompatActivity implements
         tpd.show(getFragmentManager(), "Start Time");
     }
 
+    //Merge
     private void setStartDate() {
         DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
                 new DatePickerDialog.OnDateSetListener() {
