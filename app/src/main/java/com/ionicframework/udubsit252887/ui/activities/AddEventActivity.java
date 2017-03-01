@@ -436,8 +436,7 @@ public class AddEventActivity extends AppCompatActivity implements
                 Log.v(TAG, "add event");
                 sendEvent();
                 return true;
-            case R.drawable.ic_arrow_back_black_24dp:
-                Log.d("BackPressed","True");
+
         }
         return super.onOptionsItemSelected(item);
     }

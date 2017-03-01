@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -104,16 +105,28 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         ads.setAdvertDescription(adTitle.getText().toString());
 
         EditText adCost = (EditText) findViewById(R.id.adCost);
-        ads.setAdvertCost(Double.parseDouble(adCost.getText().toString()));
+        if(!TextUtils.isEmpty(adCost.getText().toString()))
+        {
+            ads.setAdvertCost(Double.parseDouble(adCost.getText().toString()));
+        }
+
         ads.setAdvertOwner(Utils.getUserEmail());
+
+        if (ads.getAdvertDescription() == null) {
+            Toast.makeText(AddAdvertActivity.this, "No title set", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (ads.getAdvertCost() == 0) {
+            Toast.makeText(AddAdvertActivity.this, "No cost set", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (ads.getAdvertDue() == 0) {
             Toast.makeText(AddAdvertActivity.this, "No date set", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        if (image == null) {
-            Toast.makeText(AddAdvertActivity.this, "No image set", Toast.LENGTH_SHORT).show();
+        if (ads.getLatitude() == 0 && ads.getLongitude() == 0) {
+            Toast.makeText(AddAdvertActivity.this, "No location set", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -121,21 +134,17 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(AddAdvertActivity.this, "No category set", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        if (ads.getAdvertCost() == 0) {
-            Toast.makeText(AddAdvertActivity.this, "No cost set", Toast.LENGTH_SHORT).show();
+        if (image == null) {
+            Toast.makeText(AddAdvertActivity.this, "No image set", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (ads.getLatitude() == 0 && ads.getLongitude() == 0) {
-            Toast.makeText(AddAdvertActivity.this, "No location set", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        if (ads.getAdvertDescription() == null) {
-            Toast.makeText(AddAdvertActivity.this, "No title set", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
+
+
+
+
 
         new UploadImage(ads).execute(image);
         finish();
@@ -299,6 +308,11 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
                 Log.v("AddAdvertActivity", "add event");
                 createAd();
                 return true;
+            case R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
