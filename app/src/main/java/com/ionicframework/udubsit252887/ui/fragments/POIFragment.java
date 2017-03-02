@@ -63,7 +63,7 @@ public class POIFragment extends Fragment {
 
         inflater.inflate(R.menu.options_menu,menu);
         MenuItem item = menu.findItem(R.id.search);
-        item.setVisible(true);
+//        item.setVisible(true);
         SearchView searchView =  (SearchView) item.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -150,7 +150,6 @@ public class POIFragment extends Fragment {
 
         mPOIListView.setAdapter(mPOIAdapter);
 
-       Integer aItems= mPOIListView.getAdapter().getCount();
 
         mPOIListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
