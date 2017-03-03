@@ -4,7 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.ionicframework.udubsit252887.ui.fragments.MyEventsFragment">
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You don't attend to events yet"
+        android:visibility="invisible"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myEventRecycler"
         android:layout_width="match_parent"

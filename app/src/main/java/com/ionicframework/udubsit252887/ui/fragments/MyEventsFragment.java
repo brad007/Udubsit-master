@@ -49,6 +49,7 @@ public class MyEventsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         setupAdapter();
+
     }
 
     private void setupAdapter() {
@@ -91,5 +92,6 @@ public class MyEventsFragment extends Fragment {
             }
         };
         mMyEventRecycler.setAdapter(myEventAdapter);
+        Integer count = myEventAdapter.getItemCount();
     }
 }

@@ -1,6 +1,7 @@
 package com.ionicframework.udubsit252887.ui.fragments;
 
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -90,33 +91,7 @@ public class POIFragment extends Fragment {
         mPOIListView = (ListView) rootView.findViewById(R.id.poi_listview);
 
         CustomPOIAdapter();
-//        mPOIAdapter = new FirebaseListAdapter<Poi>(
-//                getActivity(),
-//                Poi.class,
-//                R.layout.item_layout_poi,
-//                FirebaseDatabase.getInstance().getReference("poi").orderByChild("name")) {
-//            @Override
-//            protected void populateView(View v, Poi model, int position) {
-//                TextView pointsText = (TextView) v.findViewById(R.id.poi_textview);
-//                pointsText.setText(model.getName());
-//                TextView pointDescr = (TextView) v.findViewById(R.id.poi_building);
-//                pointDescr.setText(model.getDescription());
-//            }
-//        };
-//
-//        mPOIListView.setAdapter(mPOIAdapter);
-//
-//        mPOIListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Poi poi = mPOIAdapter.getItem(position);
-//
-//                Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + poi.getLatitude() + "," + poi.getLongitude() + "(" + poi.getDescription() + ")=w");
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//                startActivity(mapIntent);
-//            }
-//        });
+
         return rootView;
     }
 
@@ -148,6 +123,7 @@ public class POIFragment extends Fragment {
             }
         };
 
+       
         mPOIListView.setAdapter(mPOIAdapter);
 
 
@@ -159,7 +135,16 @@ public class POIFragment extends Fragment {
                 Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + poi.getLatitude() + "," + poi.getLongitude() + "(" + poi.getDescription() + ")=w");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
+
+                try {
+                    startActivity(mapIntent);
+                }
+                catch (Exception e)
+                {
+                    DialogFragment dialogFragmentPOI = new DialogFragment();
+
+                }
+
             }
         });
 
