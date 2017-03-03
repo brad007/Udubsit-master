@@ -1,14 +1,13 @@
 package com.ionicframework.udubsit252887.ui.fragments;
 
 
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,26 +15,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.models.Poi;
-import com.ionicframework.udubsit252887.ui.activities.MainActivity;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
+import com.ionicframework.udubsit252887.ui.dialogs.POIErrorDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -141,8 +131,8 @@ public class POIFragment extends Fragment {
                 }
                 catch (Exception e)
                 {
-                    DialogFragment dialogFragmentPOI = new DialogFragment();
-
+                    POIErrorDialog poiErrorDialog = new POIErrorDialog();
+                    poiErrorDialog.show(getActivity().getFragmentManager(),"Test");
                 }
 
             }
