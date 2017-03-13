@@ -145,27 +145,19 @@ public class POIFragment extends Fragment implements SearchView.OnQueryTextListe
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-
-        if(query.length()==0){
-            limitQueryStr=null;
-            Toast.makeText(getActivity(),"Empty string",Toast.LENGTH_LONG).show();
-
-
-        }else {
-            String s1 = query.substring(0,1).toUpperCase();
-            limitQueryStr = s1 + query.substring(1);
-            Toast.makeText(getActivity(),"Submit Search",Toast.LENGTH_LONG).show();
-        }
-        CustomPOIAdapter();
         return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        if(newText.length()==0)
-        {
-            Toast.makeText(getActivity(),"Empty string",Toast.LENGTH_LONG).show();
-            limitQueryStr = null;
+//
+        if(newText.length()==0){
+            limitQueryStr=null;
+
+
+        }else {
+            String s1 = newText.substring(0,1).toUpperCase();
+            limitQueryStr = s1 + newText.substring(1);
 
         }
         CustomPOIAdapter();
