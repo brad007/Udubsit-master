@@ -142,7 +142,7 @@ public class POIFragment extends Fragment implements SearchView.OnQueryTextListe
         });
 
     }
-
+//merge message
     @Override
     public boolean onQueryTextSubmit(String query) {
         return true;
