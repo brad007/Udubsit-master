@@ -1,13 +1,21 @@
 package com.ionicframework.udubsit252887.ui.fragments;
 
 
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.DataSetObserver;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,9 +23,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,7 +40,7 @@ import com.ionicframework.udubsit252887.ui.dialogs.POIErrorDialog;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class POIFragment extends Fragment {
+public class POIFragment extends Fragment implements SearchView.OnQueryTextListener {
 
 
     private View rootView;
@@ -38,6 +48,9 @@ public class POIFragment extends Fragment {
     private FirebaseListAdapter<Poi> mPOIAdapter;
     private String limitQueryStr;
     private Query databaseRef;
+    private SimpleCursorAdapter simpleCursorAdapter;
+    private SearchView mSearchView;
+
     public POIFragment() {
         // Required empty public constructor
     }
@@ -45,32 +58,17 @@ public class POIFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(false);
+
     }
 
-//merge
+
+
+    //merge
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
 
-        inflater.inflate(R.menu.options_menu,menu);
-        MenuItem item = menu.findItem(R.id.search);
-//        item.setVisible(true);
-        SearchView searchView =  (SearchView) item.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                limitQueryStr = s;
-                CustomPOIAdapter();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-
-                return false;
-            }
-        });
     }
 
     @Override
@@ -79,22 +77,23 @@ public class POIFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_poi, container, false);
         mPOIListView = (ListView) rootView.findViewById(R.id.poi_listview);
+        mSearchView = (SearchView) rootView.findViewById(R.id.search_viewpoi);
+        mSearchView.setOnQueryTextListener(this);
 
         CustomPOIAdapter();
 
         return rootView;
     }
 
-    private void CustomPOIAdapter(){
-        if(limitQueryStr !=null){
+    private void CustomPOIAdapter() {
+        if (limitQueryStr != null) {
             //input query is != empty
             databaseRef = FirebaseDatabase.getInstance().getReference(Constants.POI_KEY)
                     .orderByChild("name")
                     .startAt(limitQueryStr)
-                    .endAt(limitQueryStr +"~");
+                    .endAt(limitQueryStr + "~");
 
-        }
-        else {
+        } else {
             databaseRef = FirebaseDatabase.getInstance().getReference(Constants.POI_KEY).orderByChild("name");
 
         }
@@ -103,17 +102,23 @@ public class POIFragment extends Fragment {
                 getActivity(),
                 Poi.class,
                 R.layout.item_layout_poi,
-                databaseRef){
+                databaseRef) {
             @Override
             protected void populateView(View v, Poi model, int position) {
+
                 TextView pointsText = (TextView) v.findViewById(R.id.poi_textview);
                 pointsText.setText(model.getName());
                 TextView pointDescr = (TextView) v.findViewById(R.id.poi_building);
                 pointDescr.setText(model.getDescription());
+
+                MatrixCursor extras = new MatrixCursor(new String[]{"Text", "Descr"});
+                extras.addRow(new String[]{pointsText.getText().toString(), pointDescr.getText().toString()});
+                Log.d("Extras", extras.toString());
+
             }
         };
 
-       
+
         mPOIListView.setAdapter(mPOIAdapter);
 
 
@@ -128,11 +133,9 @@ public class POIFragment extends Fragment {
 
                 try {
                     startActivity(mapIntent);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     POIErrorDialog poiErrorDialog = new POIErrorDialog();
-                    poiErrorDialog.show(getActivity().getFragmentManager(),"Test");
+                    poiErrorDialog.show(getActivity().getFragmentManager(), "Test");
                 }
 
             }
@@ -140,5 +143,33 @@ public class POIFragment extends Fragment {
 
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
 
+        if(query.length()==0){
+            limitQueryStr=null;
+            Toast.makeText(getActivity(),"Empty string",Toast.LENGTH_LONG).show();
+
+
+        }else {
+            String s1 = query.substring(0,1).toUpperCase();
+            limitQueryStr = s1 + query.substring(1);
+            Toast.makeText(getActivity(),"Submit Search",Toast.LENGTH_LONG).show();
+        }
+        CustomPOIAdapter();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if(newText.length()==0)
+        {
+            Toast.makeText(getActivity(),"Empty string",Toast.LENGTH_LONG).show();
+            limitQueryStr = null;
+
+        }
+        CustomPOIAdapter();
+        return false;
+    }
 }
+
