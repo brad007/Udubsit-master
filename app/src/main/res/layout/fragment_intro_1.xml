@@ -54,7 +54,7 @@
                 android:gravity="center"
                 android:paddingLeft="64dp"
                 android:paddingRight="64dp"
-                android:text="Social Community app for UWC students"
+                android:text="Welcome to UDUBSit, a social community app for UWC students"
                 android:textColor="#ffffff"
                 android:textSize="16sp" />
 

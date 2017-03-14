@@ -12,6 +12,7 @@ import android.view.Window;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.ionicframework.udubsit252887.ui.fragments.IntroFragment1;
 import com.ionicframework.udubsit252887.ui.fragments.IntroFragment2;
+import com.ionicframework.udubsit252887.ui.fragments.IntroFragment3;
 
 /**
  * Created by Test on 14/03/2017.
@@ -40,6 +41,8 @@ public class IntroActivity extends AppIntro {
 //                    Intent i = new Intent(MainActivity.this,IntroActivity.class);
                     addSlide(IntroFragment1.newInstance());
                     addSlide(IntroFragment2.newInstance());
+                    addSlide(IntroFragment3.newInstance());
+                    showStatusBar(false);
 
 //                    requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -70,10 +73,12 @@ public class IntroActivity extends AppIntro {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
+        finish();
     }
 
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
+        if(pager.getCurrentItem()==3) finish();
     }
 }
