@@ -7,12 +7,15 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.ionicframework.udubsit252887.ui.fragments.IntroFragment1;
 import com.ionicframework.udubsit252887.ui.fragments.IntroFragment2;
 import com.ionicframework.udubsit252887.ui.fragments.IntroFragment3;
+import com.ionicframework.udubsit252887.ui.fragments.IntroFragment4;
 
 /**
  * Created by Test on 14/03/2017.
@@ -42,7 +45,10 @@ public class IntroActivity extends AppIntro {
                     addSlide(IntroFragment1.newInstance());
                     addSlide(IntroFragment2.newInstance());
                     addSlide(IntroFragment3.newInstance());
+                    addSlide(IntroFragment4.newInstance());
                     showStatusBar(false);
+
+                    showSkipButton(true);
 
 //                    requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -79,6 +85,6 @@ public class IntroActivity extends AppIntro {
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
-        if(pager.getCurrentItem()==3) finish();
+
     }
 }

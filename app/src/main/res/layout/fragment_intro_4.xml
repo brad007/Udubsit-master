@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorIntroSecond">
+    android:background="@color/colorIntroFourth">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:gravity="center"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="Events"
+                android:text="Points of Interest"
                 android:textColor="#ffffff"
                 android:textSize="28sp" />
 
@@ -39,10 +39,10 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_calender_time"
+                    android:src="@drawable/ic_location"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                     />
+                    />
             </LinearLayout>
 
             <TextView
@@ -53,11 +53,10 @@
                 android:gravity="center"
                 android:paddingLeft="64dp"
                 android:paddingRight="64dp"
-                android:text="See what happens on campus and join events"
+                android:text="Find and navigate to locations on campus"
                 android:textColor="#ffffff"
                 android:textSize="16sp" />
         </LinearLayout>
 
     </ScrollView>
-
 </LinearLayout>
