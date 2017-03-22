@@ -79,12 +79,22 @@ public class IntroActivity extends AppIntro {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
+        Toast.makeText(this,"New Intro",Toast.LENGTH_LONG).show();
         finish();
     }
 
     @Override
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
+
+        if(pager.getCurrentItem()==2) {
+            pager.setCurrentItem(3);
+            Toast.makeText(this,"Pager triggered",Toast.LENGTH_LONG).show();
+        }
+        else {
+            setProgressButtonEnabled(true);
+        }
+
 
     }
 }

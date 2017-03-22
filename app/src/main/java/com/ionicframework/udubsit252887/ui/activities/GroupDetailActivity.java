@@ -182,12 +182,14 @@ public class GroupDetailActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.getValue() != null) {
                             ArrayList list = (ArrayList) dataSnapshot.getValue();
-                            if (list.contains(Utils.getUserEmail())) {
+                            if (Utils.getUserEmail().equals("udubsit@myuwec,ac,za")) {
+                                Toast.makeText(getApplicationContext(), "You are not allowed to create events :" + Utils.getUserEmail().toString(), Toast.LENGTH_LONG);
                                 Intent intent = new Intent(GroupDetailActivity.this, AddEventActivity.class);
                                 intent.putExtra(Constants.GROUP_ID_KEY, pushID);
                                 startActivity(intent);
+
                             } else {
-                                Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
+                                Toast.makeText(GroupDetailActivity.this, "You are not allowed to create events :" + Utils.getUserEmail().toString(), Toast.LENGTH_LONG)
                                         .show();
                             }
                         } else {
