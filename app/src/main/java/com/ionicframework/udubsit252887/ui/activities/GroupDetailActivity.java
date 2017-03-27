@@ -42,6 +42,7 @@ import com.ionicframework.udubsit252887.models.Person;
 import com.ionicframework.udubsit252887.models.Users;
 import com.ionicframework.udubsit252887.ui.dialogs.TaglineDialogs;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -55,6 +56,7 @@ public class GroupDetailActivity extends AppCompatActivity {
     private DatabaseReference groupUrl = FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY);
     private DatabaseReference groupList = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY);
     private DatabaseReference groupMananager = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MANAGERS);
+    private com.ionicframework.udubsit252887.models.GroupManager groupManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,8 @@ public class GroupDetailActivity extends AppCompatActivity {
         Glide.with(GroupDetailActivity.this)
                 .load(imageUrl)
                 .into(groupImage);
+
+
 
 
         mSectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
@@ -176,6 +180,16 @@ public class GroupDetailActivity extends AppCompatActivity {
     }
 
     private boolean createEvent() {
+        groupMananager.child(pushID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                groupManager = dataSnapshot.getValue(com.ionicframework.udubsit252887.models.GroupManager.class);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(GroupDetailActivity.this, "Error: "+databaseError, Toast.LENGTH_SHORT).show();
+            }
+        });
         FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY)
                 .child(pushID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -183,29 +197,18 @@ public class GroupDetailActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.getValue() != null) {
                             ArrayList list = (ArrayList) dataSnapshot.getValue();
-
-                            if (Utils.getUserEmail().equals("udubsit@myuwc.ac,za")) {
-                                Toast.makeText(getApplicationContext(), "You are not allowed to create events :" + pushID, Toast.LENGTH_LONG);
+                            String useremail = Utils.getUserEmail().replace(",",".");
+                            if (useremail.equals(groupManager.getGroupManager())) {
                                 Intent intent = new Intent(GroupDetailActivity.this, AddEventActivity.class);
                                 intent.putExtra(Constants.GROUP_ID_KEY, pushID);
                                 startActivity(intent);
 
                             } else {
-                                groupMananager.child(pushID.replace("-","")).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        String managerEmail = dataSnapshot.getChildren().iterator().next().getValue().toString();
-                                        Toast.makeText(GroupDetailActivity.this, managerEmail, Toast.LENGTH_LONG)
-                                                .show();
+                                Toast.makeText(GroupDetailActivity.this, "You are not allowed to add events to this group", Toast.LENGTH_LONG)
+                                        .show();
 
 
-                                    }
 
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
 
                             }
                         } else {
