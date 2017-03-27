@@ -54,6 +54,7 @@ public class GroupDetailActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private DatabaseReference groupUrl = FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY);
     private DatabaseReference groupList = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY);
+    private DatabaseReference groupMananager = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MANAGERS);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,15 +183,30 @@ public class GroupDetailActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.getValue() != null) {
                             ArrayList list = (ArrayList) dataSnapshot.getValue();
-                            if (Utils.getUserEmail().equals("udubsit@myuwec,ac,za")) {
-                                Toast.makeText(getApplicationContext(), "You are not allowed to create events :" + Utils.getUserEmail().toString(), Toast.LENGTH_LONG);
+
+                            if (Utils.getUserEmail().equals("udubsit@myuwc.ac,za")) {
+                                Toast.makeText(getApplicationContext(), "You are not allowed to create events :" + pushID, Toast.LENGTH_LONG);
                                 Intent intent = new Intent(GroupDetailActivity.this, AddEventActivity.class);
                                 intent.putExtra(Constants.GROUP_ID_KEY, pushID);
                                 startActivity(intent);
 
                             } else {
-                                Toast.makeText(GroupDetailActivity.this, "You are not allowed to create events :" + Utils.getUserEmail().toString(), Toast.LENGTH_LONG)
-                                        .show();
+                                groupMananager.child(pushID.replace("-","")).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        String managerEmail = dataSnapshot.getChildren().iterator().next().getValue().toString();
+                                        Toast.makeText(GroupDetailActivity.this, managerEmail, Toast.LENGTH_LONG)
+                                                .show();
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
                             }
                         } else {
                             Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
