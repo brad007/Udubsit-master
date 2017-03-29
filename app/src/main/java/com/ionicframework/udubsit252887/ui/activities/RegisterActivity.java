@@ -94,7 +94,7 @@ public class RegisterActivity extends BaseActivity implements
                 GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
                 if (result.isSuccess()) {
                     GoogleSignInAccount account = result.getSignInAccount();
-                    if (account.getEmail().contains("myuwc.ac.za")) {
+                    if (account.getEmail().contains("myuwc.ac.za") || account.getEmail().contains("uwc.ac.za")) {
                         firebaseAuthWithGoogle(account);
                     } else {
                         progressDialog.dismiss();
