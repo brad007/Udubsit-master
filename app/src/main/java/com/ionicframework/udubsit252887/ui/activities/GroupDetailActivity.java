@@ -55,7 +55,7 @@ public class GroupDetailActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private DatabaseReference groupUrl = FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY);
     private DatabaseReference groupList = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY);
-    private DatabaseReference groupMananager = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MANAGERS);
+    private DatabaseReference groupMananager = FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY);
     private com.ionicframework.udubsit252887.models.GroupManager groupManager;
 
     @Override
