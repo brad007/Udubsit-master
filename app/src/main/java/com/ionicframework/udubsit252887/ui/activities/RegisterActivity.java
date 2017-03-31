@@ -50,8 +50,17 @@ public class RegisterActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent i = new Intent(this, IntroActivity.class);
-        startActivity(i);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sp.edit();
+        Boolean key = sp.getBoolean("onFirstStart",false);
+        if(key==false)
+        {
+            Intent i = new Intent(this, IntroActivity.class);
+            startActivity(i);
+            editor.putBoolean("onFirstStart",true).apply();
+            key=sp.getBoolean("onFirstStart",true);
+        }
+
         setContentView(R.layout.activity_register);
         //Button listener
         findViewById(R.id.google_sign_in).setOnClickListener(this);
