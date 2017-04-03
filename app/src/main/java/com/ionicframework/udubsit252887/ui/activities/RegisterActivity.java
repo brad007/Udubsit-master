@@ -44,6 +44,8 @@ public class RegisterActivity extends BaseActivity implements
 
     private ProgressDialog progressDialog;
 
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);

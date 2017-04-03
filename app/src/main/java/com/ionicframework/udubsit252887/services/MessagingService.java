@@ -28,9 +28,11 @@ public class MessagingService extends FirebaseMessagingService {
          */
     }
 
+
     @Override
     public void onMessageSent(String s) {
         //todo:send notifs pojo to user
         super.onMessageSent(s);
     }
+
 }
