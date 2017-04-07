@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity
 
         }
 
-        //merge to develop
+
 
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
