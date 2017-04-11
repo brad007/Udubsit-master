@@ -413,11 +413,11 @@ public class ViewEventActivity extends AppCompatActivity {
 
                     Date startDate = new Date(event.getStartDate());
                     startDateView.setText(
-                            Utils.getDay(startDate.getDay()) + ", " + Utils.getMonth(startDate.getMonth()) + " " + startDate.getDate() + ", " + startDate.getYear()
+                             Utils.getMonth(startDate.getMonth()) + " " + startDate.getDate() + ", " + startDate.getYear()
                     );
                     Date endDate = new Date(event.getEndDate());
                     endDateView.setText(
-                            Utils.getDay(endDate.getDay()) + ", " + Utils.getMonth(endDate.getMonth()) + " " + endDate.getDate() + ", " + endDate.getYear()
+                            Utils.getMonth(endDate.getMonth()) + " " + endDate.getDate() + ", " + endDate.getYear()
                     );
 
                     Date d = new Date(event.getStartDate());

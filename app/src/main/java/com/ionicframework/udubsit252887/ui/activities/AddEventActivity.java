@@ -77,7 +77,7 @@ public class AddEventActivity extends AppCompatActivity implements
     private String eventId;
     private Calendar now;
     private Event event;
-    private Date startDate = new Date(System.currentTimeMillis());
+    private Date startDate = new Date();
 
     /*
     String[] ITEMS = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"};
@@ -86,7 +86,7 @@ public class AddEventActivity extends AppCompatActivity implements
  spinner = (MaterialSpinner) findViewById(R.id.spinner);
  spinner.setAdapter(adapter);
      */
-    private Date endDate = new Date(System.currentTimeMillis());
+    private Date endDate = new Date();
     private Bitmap image;
     private MaterialSpinner spinner;
 
@@ -334,7 +334,8 @@ public class AddEventActivity extends AppCompatActivity implements
                         endDate.setDate(dayOfMonth);
 
                         endDateView.setText(
-                                Utils.getDay(endDate.getDay()) + ", " + Utils.getMonth(monthOfYear) + " " + dayOfMonth + ", " + year
+//                                Utils.getDay(endDate.getDay()) + ", " + Utils.getMonth(monthOfYear) + " " + dayOfMonth + ", " + year
+                                  Utils.getMonth(monthOfYear) + " "+dayOfMonth + ", "  + year
                         );
                     }
                 },
@@ -377,7 +378,8 @@ public class AddEventActivity extends AppCompatActivity implements
                         startDate.setDate(dayOfMonth);
 
                         startDateView.setText(
-                                Utils.getDay(startDate.getDay()) + ", " + Utils.getMonth(monthOfYear) + " " + dayOfMonth + ", " + year
+//                                dayOfMonth + " " + Utils.getMonth(monthOfYear) + " " + year
+                                Utils.getMonth(monthOfYear) + " "+dayOfMonth + ", "  + year
                         );
                     }
                 },
