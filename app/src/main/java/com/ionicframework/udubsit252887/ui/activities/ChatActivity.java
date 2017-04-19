@@ -1,6 +1,7 @@
 package com.ionicframework.udubsit252887.ui.activities;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -146,11 +148,18 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void sendChat() {
+        InputMethodManager keyboard= (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+
         String text = chatEditView.getText().toString();
         Comment comment = new Comment(Utils.getUserEmail(), text, -1 * System.currentTimeMillis());
         FirebaseDatabase.getInstance().getReference(Constants.CHATS_KEY)
                 .child(UID)
                 .push()
                 .setValue(comment);
+        chatEditView.setText("");
+
+
+
     }
 }
