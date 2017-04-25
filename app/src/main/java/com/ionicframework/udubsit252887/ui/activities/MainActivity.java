@@ -154,6 +154,9 @@ public class MainActivity extends BaseActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            if(getFragmentManager().getBackStackEntryCount()>0)
+            getFragmentManager().popBackStack();
+            else
             super.onBackPressed();
         }
     }

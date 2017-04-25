@@ -157,8 +157,21 @@ public class GroupDetailActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String UID = (String) dataSnapshot.getValue();
-                        DialogFragment dialogFragment = new TaglineDialogs(pushID, UID);
-                        dialogFragment.show(getSupportFragmentManager(), null);
+//                        DialogFragment dialogFragment = new TaglineDialogs(pushID, UID);
+//                        dialogFragment.show(getSupportFragmentManager(), null);
+
+                        DatabaseReference groupUrl = FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY);
+                        final DatabaseReference groupList = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY);
+                        //Incrementing group member number
+                        GroupManager.increaseGroupMembers(1, pushID);
+                        //Adding my email to group member list
+                        Utils.addToList(groupList.child(pushID), getApplicationContext());
+                        Person person = new Person(Utils.getUserEmail());
+                        DatabaseReference groupMemberRef = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBERS)
+                                .child(pushID)
+                                .child(UID);
+                        //Adding my person object ot group
+                        GroupManager.addMember(person, groupMemberRef, getApplicationContext());
                     }
 
                     @Override
@@ -313,10 +326,9 @@ public class GroupDetailActivity extends AppCompatActivity {
                             FirebaseDatabase.getInstance()
                                     .getReference(Constants.GROUP_MEMBERS)
                                     .child(pushID)
-                    ) {
+                    ){
                         @Override
                         protected void populateViewHolder(final PersonHolder viewHolder, final Person model, int position) {
-                            viewHolder.setUserTagline(model.getTagline());
                             viewHolder.personItemLayout.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -342,12 +354,12 @@ public class GroupDetailActivity extends AppCompatActivity {
 
                                         }
                                     });
-                        }
+//                        }
                     };
             LinearLayoutManager manager = new LinearLayoutManager(getContext());
-            mGroupRecycler.setLayoutManager(manager);
-            mGroupRecycler.setAdapter(adapter);
-        }
+//            mGroupRecycler.setLayoutManager(manager);
+//            mGroupRecycler.setAdapter(adapter);
+        };}
 
         private void setupAdAdapter() {
             FirebaseRecyclerAdapter<Ads, AdvertHolder> adapter = new FirebaseRecyclerAdapter<Ads, AdvertHolder>(

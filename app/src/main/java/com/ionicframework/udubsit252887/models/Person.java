@@ -10,10 +10,10 @@ public class Person {
     public Person() {
     }
 
-    public Person(String email, String tagline) {
+    public Person(String email) {
 
         this.email = email;
-        this.tagline = tagline;
+
     }
 
     public String getEmail() {
@@ -21,7 +21,5 @@ public class Person {
         return email;
     }
 
-    public String getTagline() {
-        return tagline;
-    }
+
 }

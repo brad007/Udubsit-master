@@ -53,7 +53,7 @@ public class TaglineDialogs extends DialogFragment {
                 GroupManager.increaseGroupMembers(1, pushID);
                 //Adding my email to group member list
                 Utils.addToList(groupList.child(pushID), getContext());
-                Person person = new Person(Utils.getUserEmail(), tagline);
+                Person person = new Person(Utils.getUserEmail());
                 DatabaseReference groupMemberRef = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBERS)
                         .child(pushID)
                         .child(UID);
