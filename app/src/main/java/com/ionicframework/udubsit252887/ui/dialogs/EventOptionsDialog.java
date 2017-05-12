@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.UploadImage;
@@ -36,7 +37,7 @@ public class EventOptionsDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Add:")
                 .setSingleChoiceItems(R.array.event_options_array, -1, new DialogInterface.OnClickListener() {
                     @Override
@@ -51,7 +52,15 @@ public class EventOptionsDialog extends DialogFragment {
                                 dismiss();
                                 break;
                             case 2 :
-                                DialogFragment dialogFragment1 = new DialogFragment();
+                                //Start the gmail application
+                                final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+//                              Fill the email with content
+                                emailIntent.setType("plain/text");
+                                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"brent.vanwildemeersch@hotmail.be"});
+                                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "UDUBSIT Abuse Event''");
+//                              Launching Email App to send email
+                                getContext().startActivity(Intent.createChooser(emailIntent,"Send email...."));
 //                                report abuse
                                 break;
                             case 3 :
