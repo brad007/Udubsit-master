@@ -76,6 +76,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                                     .setValue(UID);
                             setupAdapter();
                         }
+
+                        String emailrecipient = recipientEmail;
                     }
 
                     @Override

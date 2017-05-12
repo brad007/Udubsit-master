@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.ionicframework.udubsit252887.BaseActivity;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
@@ -66,7 +67,7 @@ public class MainActivity extends BaseActivity
 
         mDatabase = FirebaseDatabase.getInstance().getReference("groupManagers");
 
-
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -147,6 +148,7 @@ public class MainActivity extends BaseActivity
                     }
                 });
     }
+
 
     @Override
     public void onBackPressed() {

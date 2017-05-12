@@ -50,6 +50,13 @@ public class EventOptionsDialog extends DialogFragment {
                                 dialogFragment.show(getFragmentManager(), null);
                                 dismiss();
                                 break;
+                            case 2 :
+                                DialogFragment dialogFragment1 = new DialogFragment();
+//                                report abuse
+                                break;
+                            case 3 :
+//                                report explicit content
+                                break;
                         }
                     }
                 });

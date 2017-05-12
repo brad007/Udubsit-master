@@ -52,6 +52,7 @@ public class GroupFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_group, container, false);
         initialiseScreen();
         return rootView;
+
     }
 
     private void initialiseScreen() {

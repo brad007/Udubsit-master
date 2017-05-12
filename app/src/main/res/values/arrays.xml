@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="event_options_array">
-        <item>Image</item>
-        <item>Comment</item>
+        <item>Add Image</item>
+        <item>Add Comment</item>
+        <item>Report Abuse</item>
+        <item>Report Explicit Content</item>
     </string-array>
+
+
 
     <string-array name="schedual_filter">
         <item>Building</item>

@@ -28,6 +28,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.ionicframework.udubsit252887.BaseActivity;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
@@ -65,6 +66,8 @@ public class RegisterActivity extends BaseActivity implements
         //Button listener
         findViewById(R.id.google_sign_in).setOnClickListener(this);
         findViewById(R.id.terms_and_conditions_textview).setOnClickListener(this);
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
 
         mAuth = FirebaseAuth.getInstance();
