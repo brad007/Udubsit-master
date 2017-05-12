@@ -71,6 +71,7 @@ public class EventOptionsDialog extends DialogFragment {
 //                              Fill the email with content
                                 emailIntentexplicit.setType("plain/text");
                                 emailIntentexplicit.putExtra(Intent.EXTRA_EMAIL, new String[]{});
+
                                 emailIntentexplicit.putExtra(Intent.EXTRA_SUBJECT, "UDUBSIT Explicit content''");
 //                              Launching Email App to send email
                                 getContext().startActivity(Intent.createChooser(emailIntentexplicit,"Send email...."));
