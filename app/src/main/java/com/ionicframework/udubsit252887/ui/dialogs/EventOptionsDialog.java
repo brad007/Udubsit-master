@@ -65,6 +65,16 @@ public class EventOptionsDialog extends DialogFragment {
                                 break;
                             case 3 :
 //                                report explicit content
+                                //Start the gmail application
+                                final Intent emailIntentexplicit = new Intent(Intent.ACTION_SEND);
+
+//                              Fill the email with content
+                                emailIntentexplicit.setType("plain/text");
+                                emailIntentexplicit.putExtra(Intent.EXTRA_EMAIL, new String[]{});
+                                emailIntentexplicit.putExtra(Intent.EXTRA_SUBJECT, "UDUBSIT Explicit content''");
+//                              Launching Email App to send email
+                                getContext().startActivity(Intent.createChooser(emailIntentexplicit,"Send email...."));
+//                                report abuse
                                 break;
                         }
                     }
