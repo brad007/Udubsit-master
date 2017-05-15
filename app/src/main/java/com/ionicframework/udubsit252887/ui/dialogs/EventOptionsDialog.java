@@ -143,6 +143,8 @@ public class EventOptionsDialog extends DialogFragment {
                                         getContext().startActivity(Intent.createChooser(emailIntent,"Send email...."));
 ////                                    report abuse
 
+
+
                                     }
 
                                     @Override
