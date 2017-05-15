@@ -15,7 +15,13 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ionicframework.udubsit252887.R;
+import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.UploadImage;
 import com.ionicframework.udubsit252887.Utils.Utils;
 import com.ionicframework.udubsit252887.models.EventImageUrl;
@@ -52,16 +58,31 @@ public class EventOptionsDialog extends DialogFragment {
                                 dismiss();
                                 break;
                             case 2 :
-                                //Start the gmail application
-                                final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//                              Group ID of Selected group
+                                DatabaseReference groupUrl = FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY);
 
-//                              Fill the email with content
-                                emailIntent.setType("plain/text");
-                                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"brent.vanwildemeersch@hotmail.be"});
-                                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "UDUBSIT Abuse Event''");
-//                              Launching Email App to send email
-                                getContext().startActivity(Intent.createChooser(emailIntent,"Send email...."));
-//                                report abuse
+                                groupUrl.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+//                                //Start the gmail application
+//                                final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//
+////                              Fill the email with content
+//                                emailIntent.setType("plain/text");
+//                                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"brent.vanwildemeersch@hotmail.be"});
+//                                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "UDUBSIT Abuse Event''");
+////                              Launching Email App to send email
+//                                getContext().startActivity(Intent.createChooser(emailIntent,"Send email...."));
+////                                report abuse
                                 break;
                             case 3 :
 //                                report explicit content
@@ -72,7 +93,7 @@ public class EventOptionsDialog extends DialogFragment {
                                 emailIntentexplicit.setType("plain/text");
                                 emailIntentexplicit.putExtra(Intent.EXTRA_EMAIL, new String[]{});
 
-                                emailIntentexplicit.putExtra(Intent.EXTRA_SUBJECT, "UDUBSIT Explicit content''");
+                                emailIntentexplicit.putExtra(Intent.EXTRA_SUBJECT, "UDUBSIT Explicit content");
 //                              Launching Email App to send email
                                 getContext().startActivity(Intent.createChooser(emailIntentexplicit,"Send email...."));
 //                                report abuse
