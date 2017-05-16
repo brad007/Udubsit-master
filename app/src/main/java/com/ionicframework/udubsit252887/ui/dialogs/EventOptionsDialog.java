@@ -116,6 +116,8 @@ public class EventOptionsDialog extends DialogFragment {
                                     }
                                 });
 
+                                dismiss();
+
 
 
 //                                //Start the gmail application
