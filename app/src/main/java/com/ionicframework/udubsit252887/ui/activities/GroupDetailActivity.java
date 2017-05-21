@@ -157,10 +157,7 @@ public class GroupDetailActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String UID = (String) dataSnapshot.getValue();
-//                        DialogFragment dialogFragment = new TaglineDialogs(pushID, UID);
-//                        dialogFragment.show(getSupportFragmentManager(), null);
 
-                        DatabaseReference groupUrl = FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY);
                         final DatabaseReference groupList = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY);
                         //Incrementing group member number
                         GroupManager.increaseGroupMembers(1, pushID);
@@ -357,8 +354,7 @@ public class GroupDetailActivity extends AppCompatActivity {
 //                        }
                     };
             LinearLayoutManager manager = new LinearLayoutManager(getContext());
-//            mGroupRecycler.setLayoutManager(manager);
-//            mGroupRecycler.setAdapter(adapter);
+
         };}
 
         private void setupAdAdapter() {
@@ -467,9 +463,6 @@ public class GroupDetailActivity extends AppCompatActivity {
                 this.username.setText(username);
             }
 
-            public void setUserTagline(String tagline) {
-                userTagline.setText(tagline);
-            }
         }
 
 
@@ -550,7 +543,8 @@ public class GroupDetailActivity extends AppCompatActivity {
             public void setEventDate(long date) {
                 Date startDate = new Date(date);
                 eventDate.setText(
-                        Utils.getDay(startDate.getDay()) + ", " + Utils.getMonth(startDate.getMonth()) + " " + startDate.getDate() + ", " + startDate.getYear()
+                        Utils.getDay(startDate.getDay()) + ", " + Utils.getMonth(startDate.getMonth()) + " "
+                                + startDate.getDate() + ", " + startDate.getYear()
                 );
             }
 
@@ -563,8 +557,6 @@ public class GroupDetailActivity extends AppCompatActivity {
                 eventLocation.setText(local);
             }
 
-            public void setEventDirections(String eventDirections) {
-            }
 
         }
 

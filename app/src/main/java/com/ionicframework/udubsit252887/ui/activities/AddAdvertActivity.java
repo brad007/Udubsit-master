@@ -194,7 +194,6 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
             e.printStackTrace();
         }
     }
-
     private void addImage() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 
@@ -222,19 +221,6 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
             switch (requestCode) {
                 case PLACE_PICKER_REQUEST:
 
-                    /*
-                    Log.v(TAG, "Place picker");
-                    Place place = PlacePicker.getPlace(data, this);
-                    event.setAddress((String) place.getAddress());
-                    event.setLocationDescription((String) place.getName());
-
-                    TextView locationText = (TextView) findViewById(R.id.location_text);
-                    locationText.setText(event.getLocationDescription() + ", " + event.getAddress());
-
-                    Log.v(TAG, place.getLatLng().longitude + ":" + place.getLatLng().longitude);
-                    event.setLongitude(place.getLatLng().longitude);
-                    event.setLatitude(place.getLatLng().latitude);
-                     */
                     Place place = PlacePicker.getPlace(data, this);
 
                     String placeName = (String) place.getName();

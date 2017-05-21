@@ -67,9 +67,6 @@ public class RegisterActivity extends BaseActivity implements
         findViewById(R.id.google_sign_in).setOnClickListener(this);
         findViewById(R.id.terms_and_conditions_textview).setOnClickListener(this);
 
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-
-
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -133,9 +130,7 @@ public class RegisterActivity extends BaseActivity implements
 
 
     private void firebaseAuthWithGoogle(final GoogleSignInAccount account) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + account.getDisplayName());
-
-        AuthCredential credentials = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                AuthCredential credentials = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credentials)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -145,7 +140,6 @@ public class RegisterActivity extends BaseActivity implements
 
                                 if (task.isSuccessful()) {
                                     Toast.makeText(RegisterActivity.this, "Authentication successful", Toast.LENGTH_SHORT).show();
-
                                     Users user;
                                     String photoUrl = null;
                                     if (account.getPhotoUrl() != null) {
@@ -157,17 +151,15 @@ public class RegisterActivity extends BaseActivity implements
                                             photoUrl,
                                             FirebaseAuth.getInstance().getCurrentUser().getUid()
                                     );
-
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference userRef = database.getReference(Constants.USERS_KEY);
-                                    userRef.child(account.getEmail().replace(".", ",")).setValue(user, new DatabaseReference.CompletionListener() {
+                                    userRef.child(account.getEmail().replace(".", ","))
+                                            .setValue(user, new DatabaseReference.CompletionListener() {
                                         @Override
                                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                                             finish();
                                         }
                                     });
-                                    Log.v(TAG, "Authentification successful");
-
 
                                 } else {
                                     progressDialog.dismiss();

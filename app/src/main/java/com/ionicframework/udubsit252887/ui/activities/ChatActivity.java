@@ -77,7 +77,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                             setupAdapter();
                         }
 
-                        String emailrecipient = recipientEmail;
                     }
 
                     @Override
@@ -150,9 +149,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void sendChat() {
-        InputMethodManager keyboard= (InputMethodManager)
-                getSystemService(Context.INPUT_METHOD_SERVICE);
-
         String text = chatEditView.getText().toString();
         Comment comment = new Comment(Utils.getUserEmail(), text, -1 * System.currentTimeMillis());
         FirebaseDatabase.getInstance().getReference(Constants.CHATS_KEY)
@@ -160,8 +156,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 .push()
                 .setValue(comment);
         chatEditView.setText("");
-
-
 
     }
 }

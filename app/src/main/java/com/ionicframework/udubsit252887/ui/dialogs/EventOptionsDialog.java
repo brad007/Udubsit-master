@@ -88,7 +88,8 @@ public class EventOptionsDialog extends DialogFragment {
                                 break;
                             case 2 :
 //                              Group ID of Selected group
-                                FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY).child(groupID).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                                FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY).child(groupID).child("name")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         groupName = dataSnapshot.getValue().toString();

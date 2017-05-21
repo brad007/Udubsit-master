@@ -80,11 +80,7 @@ public class AddEventActivity extends AppCompatActivity implements
     private Date startDate = new Date();
 
     /*
-    String[] ITEMS = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"};
- ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
- adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
- spinner = (MaterialSpinner) findViewById(R.id.spinner);
- spinner.setAdapter(adapter);
+
      */
     private Date endDate = new Date();
     private Bitmap image;
@@ -96,16 +92,6 @@ public class AddEventActivity extends AppCompatActivity implements
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-
-        //set start & enddate default to date today
-//        TextView startdate= (TextView) findViewById(R.id.start_date_text);
-//        SimpleDateFormat dfDate_day= new SimpleDateFormat("dd/MM/yyyy");
-//        Calendar c = Calendar.getInstance();
-//        String data=dfDate_day.format(c.getTime());
-//        Log.d("DateTime", data);
-//        startdate.setText(data);
-
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -249,9 +235,6 @@ public class AddEventActivity extends AppCompatActivity implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.all_day_switch:
-                setAllDay();
-                break;
             case R.id.start_date_text:
                 setStartDate();
                 break;
@@ -334,7 +317,6 @@ public class AddEventActivity extends AppCompatActivity implements
                         endDate.setDate(dayOfMonth);
 
                         endDateView.setText(
-//                                Utils.getDay(endDate.getDay()) + ", " + Utils.getMonth(monthOfYear) + " " + dayOfMonth + ", " + year
                                   Utils.getMonth(monthOfYear) + " "+dayOfMonth + ", "  + year
                         );
                     }
@@ -378,7 +360,6 @@ public class AddEventActivity extends AppCompatActivity implements
                         startDate.setDate(dayOfMonth);
 
                         startDateView.setText(
-//                                dayOfMonth + " " + Utils.getMonth(monthOfYear) + " " + year
                                 Utils.getMonth(monthOfYear) + " "+dayOfMonth + ", "  + year
                         );
                     }
@@ -393,18 +374,15 @@ public class AddEventActivity extends AppCompatActivity implements
     }
 
 
-    private void setAllDay() {
 
-    }
 
 
     private void initialiseScreen() {
 
         allDaySwitch = (Switch) findViewById(R.id.all_day_switch);
         eventTitleView = (EditText) findViewById(R.id.event_title_view);
-//        eventTitleView.setError("10 - 35 characters");
         eventTitleView.setError(Html.fromHtml("<font color='#ffffff'>10-35 characters</font>"));
-//        eventTitleView.setTextColor(Color.WHITE);
+
 
         startDateView = (TextView) findViewById(R.id.start_date_text);
         startTimeView = (TextView) findViewById(R.id.start_time_text);

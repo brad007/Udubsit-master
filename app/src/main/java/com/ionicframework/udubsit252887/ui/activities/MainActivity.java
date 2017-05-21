@@ -98,13 +98,7 @@ public class MainActivity extends BaseActivity
         }
         setPage(args.getInt(ARG_PAGE_NUMBER));
 
-        /*Keeping track of which screen was last shown and displaying it on startup
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        int position = sp.getInt(Constants.POSITION, 1);
-        if (position == 1) {
-            fragmentTransaction.replace(R.id.container, new GroupFragment()).commit();
-        }
-        */
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

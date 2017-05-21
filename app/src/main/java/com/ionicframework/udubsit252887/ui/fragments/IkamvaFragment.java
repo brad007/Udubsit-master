@@ -51,11 +51,6 @@ public class IkamvaFragment extends Fragment {
                 }
                 return true;
 
-//                if ((i == KeyEvent.KEYCODE_BACK) && ikamva.canGoBack()) {
-//                    ikamva.goBack();
-//
-//                    return true;
-//                }
 
             }
         });

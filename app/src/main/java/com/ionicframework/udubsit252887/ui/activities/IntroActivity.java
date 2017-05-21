@@ -50,8 +50,6 @@ public class IntroActivity extends AppIntro {
 
                     showSkipButton(true);
 
-//                    requestWindowFeature(Window.FEATURE_NO_TITLE);
-
                     //make new preference editor
                     SharedPreferences.Editor e = getPrefs.edit();
 

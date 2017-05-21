@@ -27,7 +27,7 @@ import com.ionicframework.udubsit252887.ui.dialogs.SchedualFilterDialog;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SchedualFragment extends Fragment implements SearchView.OnQueryTextListener, View.OnClickListener {
+public class    SchedualFragment extends Fragment implements SearchView.OnQueryTextListener, View.OnClickListener {
 
 
     private View rootView;
