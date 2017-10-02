@@ -13,11 +13,22 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ionicframework.udubsit252887.R;
+import com.ionicframework.udubsit252887.Utils.Constants;
 import com.ionicframework.udubsit252887.Utils.UploadImage;
 import com.ionicframework.udubsit252887.Utils.Utils;
 import com.ionicframework.udubsit252887.models.EventImageUrl;
+
+import java.lang.reflect.Field;
+import java.security.acl.Group;
+import java.util.HashMap;
 
 /**
  * Created by brad on 2016/07/05.
@@ -28,6 +39,9 @@ public class EventOptionsDialog extends DialogFragment {
     private static final int IMAGE_PICK = 1;
     private String groupID;
     private String eventID;
+    private String groupName;
+    private String eventName;
+    private String groupManager;
 
     public EventOptionsDialog(String groupID, String eventID) {
         this.groupID = groupID;
@@ -36,7 +50,29 @@ public class EventOptionsDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        FirebaseDatabase.getInstance().getReference(Constants.EVENTS_KEY).child(groupID).child(eventID).child("title").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                eventName = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY).child(groupID).child("groupManager").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                groupManager = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Add:")
                 .setSingleChoiceItems(R.array.event_options_array, -1, new DialogInterface.OnClickListener() {
                     @Override
@@ -50,6 +86,75 @@ public class EventOptionsDialog extends DialogFragment {
                                 dialogFragment.show(getFragmentManager(), null);
                                 dismiss();
                                 break;
+                            case 2 :
+//                              Group ID of Selected group
+                                FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY).child(groupID).child("name")
+                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        groupName = dataSnapshot.getValue().toString();
+
+                                        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+//                                      Fill the email with content
+                                        emailIntent.setType("plain/text");
+                                        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{groupManager});
+                                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "UDUBSIT Abuse in "+ groupName + " group");
+                                        StringBuilder emailBody = new StringBuilder("Dear UDUBSIT Group Admin");
+                                        emailBody.append("\n").append("\n");
+                                        emailBody.append("There is abuse reported in the '" + eventName + "' event");
+
+                                        emailIntent.putExtra(Intent.EXTRA_TEXT, emailBody.toString());
+//                                      Launching Email App to send email
+                                        getContext().startActivity(Intent.createChooser(emailIntent,"Send email...."));
+////                                    report abuse
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                                dismiss();
+
+
+
+//                                //Start the gmail application
+
+                                break;
+                            case 3 :
+//                                report explicit content
+                                FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY).child(groupID).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        groupName = dataSnapshot.getValue().toString();
+
+                                        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+//                                      Fill the email with content
+                                        emailIntent.setType("plain/text");
+                                        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{groupManager});
+                                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "UDUBSIT Explicit content in "+ groupName + " group");
+                                        StringBuilder emailBody = new StringBuilder("Dear UDUBSIT Group Admin");
+                                        emailBody.append("\n").append("\n");
+                                        emailBody.append("There is explicit content reported in the '" + eventName + "' event");
+
+                                        emailIntent.putExtra(Intent.EXTRA_TEXT, emailBody.toString());
+//                                      Launching Email App to send email
+                                        getContext().startActivity(Intent.createChooser(emailIntent,"Send email...."));
+////                                    report abuse
+
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
                         }
                     }
                 });

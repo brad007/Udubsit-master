@@ -49,47 +49,53 @@ public class MyEventsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         setupAdapter();
+
     }
 
     private void setupAdapter() {
 
+        if(Utils.getUserEmail()!=null)
+        {
+            myEventAdapter = new FirebaseRecyclerAdapter<Event, EventHolder>(
+                    Event.class,
+                    R.layout.item_layout_event,
+                    EventHolder.class,
+                    FirebaseDatabase.getInstance()
+                            .getReference(Constants.MY_EVENTS_KEY)
+                            .child(Utils.getUserEmail())
+                            .orderByChild("startDate")
+                            .startAt(System.currentTimeMillis())
+            ) {
+                @Override
+                protected void populateViewHolder(final EventHolder viewHolder, final Event model, int position) {
+                    final String event_image_url = model.getEventImageUrl();
+                    Glide.with(getActivity())
+                            .load(event_image_url)
+                            .into(viewHolder.eventImage);
+                    viewHolder.setEventHeading(model.getTitle());
+                    viewHolder.setEventMembers(model.getNumOfPeople());
 
-        myEventAdapter = new FirebaseRecyclerAdapter<Event, EventHolder>(
-                Event.class,
-                R.layout.item_layout_event,
-                EventHolder.class,
-                FirebaseDatabase.getInstance()
-                        .getReference(Constants.MY_EVENTS_KEY)
-                        .child(Utils.getUserEmail())
-                        .orderByChild("startDate")
-                        .startAt(System.currentTimeMillis())
-        ) {
-            @Override
-            protected void populateViewHolder(final EventHolder viewHolder, final Event model, int position) {
-                final String event_image_url = model.getEventImageUrl();
-                Glide.with(getActivity())
-                        .load(event_image_url)
-                        .into(viewHolder.eventImage);
-                viewHolder.setEventHeading(model.getTitle());
-                viewHolder.setEventMembers(model.getNumOfPeople());
+                    viewHolder.setEventDate(model.getStartDate());
 
-                viewHolder.setEventDate(model.getStartDate());
+                    final String eventID = model.getEventId();
+                    viewHolder.eventCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getContext(),
+                                    ViewEventActivity.class);
+                            intent.putExtra(Constants.IMAGE_URL_KEY, event_image_url);
+                            intent.putExtra(Constants.EVENT_ID_KEY, eventID);
+                            intent.putExtra(Constants.GROUP_ID_KEY, model.getGroupId());
+                            intent.putExtra(Constants.EMAIL_KEY, model.getOwner());
+                            startActivity(intent);
+                        }
+                    });
+                }
+        };
 
-                final String eventID = model.getEventId();
-                viewHolder.eventCard.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getContext(),
-                                ViewEventActivity.class);
-                        intent.putExtra(Constants.IMAGE_URL_KEY, event_image_url);
-                        intent.putExtra(Constants.EVENT_ID_KEY, eventID);
-                        intent.putExtra(Constants.GROUP_ID_KEY, model.getGroupId());
-                        intent.putExtra(Constants.EMAIL_KEY, model.getOwner());
-                        startActivity(intent);
-                    }
-                });
-            }
+
         };
         mMyEventRecycler.setAdapter(myEventAdapter);
+
     }
 }

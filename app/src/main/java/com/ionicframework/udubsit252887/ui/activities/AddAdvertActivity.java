@@ -6,12 +6,18 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,12 +34,16 @@ import com.ionicframework.udubsit252887.models.Ads;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
-public class AddAdvertActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+public class AddAdvertActivity extends AppCompatActivity implements View.OnClickListener,
+        DatePickerDialog.OnDateSetListener,
+        AdapterView.OnItemClickListener,
+        AdapterView.OnItemSelectedListener {
 
     private static final int PLACE_PICKER_REQUEST = 1;
     private static final int IMAGE_PICKER = 2;
@@ -57,6 +67,7 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
     private Bitmap image;
     private MaterialSpinner spinner;
 
+//    merge
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +81,7 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        findViewById(R.id.fab).setOnClickListener(this);
+//        findViewById(R.id.fab).setOnClickListener(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.end_date_text).setOnClickListener(this);
@@ -85,25 +96,37 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
     }
-
+//  merge
     private void createAd() {
         ads.setAdvertId(Utils.getPushId());
         ads.setAdvertGroupId(getIntent().getStringExtra(Constants.PUSH_ID_KEY));
 
-        AutoCompleteTextView adTitle = (AutoCompleteTextView) findViewById(R.id.adTitle);
+        EditText adTitle = (EditText) findViewById(R.id.adTitle);
         ads.setAdvertDescription(adTitle.getText().toString());
 
-        AutoCompleteTextView adCost = (AutoCompleteTextView) findViewById(R.id.adCost);
-        ads.setAdvertCost(Double.parseDouble(adCost.getText().toString()));
+        EditText adCost = (EditText) findViewById(R.id.adCost);
+        if(!TextUtils.isEmpty(adCost.getText().toString()))
+        {
+            ads.setAdvertCost(Double.parseDouble(adCost.getText().toString()));
+        }
+
         ads.setAdvertOwner(Utils.getUserEmail());
+
+        if (ads.getAdvertDescription() == null) {
+            Toast.makeText(AddAdvertActivity.this, "No title set", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (ads.getAdvertCost() == 0) {
+            Toast.makeText(AddAdvertActivity.this, "No cost set", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (ads.getAdvertDue() == 0) {
             Toast.makeText(AddAdvertActivity.this, "No date set", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        if (image == null) {
-            Toast.makeText(AddAdvertActivity.this, "No image set", Toast.LENGTH_SHORT).show();
+        if (ads.getLatitude() == 0 && ads.getLongitude() == 0) {
+            Toast.makeText(AddAdvertActivity.this, "No location set", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -111,24 +134,21 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(AddAdvertActivity.this, "No category set", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        if (ads.getAdvertCost() == 0) {
-            Toast.makeText(AddAdvertActivity.this, "No cost set", Toast.LENGTH_SHORT).show();
+        if (image == null) {
+            Toast.makeText(AddAdvertActivity.this, "No image set", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (ads.getLatitude() == 0 && ads.getLongitude() == 0) {
-            Toast.makeText(AddAdvertActivity.this, "No location set", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
-        if (ads.getAdvertDescription() == null) {
-            Toast.makeText(AddAdvertActivity.this, "No title set", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
+
+
+
+
 
         new UploadImage(ads).execute(image);
         finish();
+        Toast.makeText(this,"Advert created",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -174,7 +194,6 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
             e.printStackTrace();
         }
     }
-
     private void addImage() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 
@@ -202,19 +221,6 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
             switch (requestCode) {
                 case PLACE_PICKER_REQUEST:
 
-                    /*
-                    Log.v(TAG, "Place picker");
-                    Place place = PlacePicker.getPlace(data, this);
-                    event.setAddress((String) place.getAddress());
-                    event.setLocationDescription((String) place.getName());
-
-                    TextView locationText = (TextView) findViewById(R.id.location_text);
-                    locationText.setText(event.getLocationDescription() + ", " + event.getAddress());
-
-                    Log.v(TAG, place.getLatLng().longitude + ":" + place.getLatLng().longitude);
-                    event.setLongitude(place.getLatLng().longitude);
-                    event.setLatitude(place.getLatLng().latitude);
-                     */
                     Place place = PlacePicker.getPlace(data, this);
 
                     String placeName = (String) place.getName();
@@ -226,13 +232,23 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
                     ads.setLongitude(place.getLatLng().longitude);
                     break;
                 case IMAGE_PICKER:
-                    Bundle extras = data.getExtras();
-                    image = extras.getParcelable("data");
-                    ImageView imageView = (ImageView) findViewById(R.id.ad_image);
-                    imageView.setImageBitmap(image);
+                    Uri imageURI = data.getData();
+
+                    if (imageURI != null) {
+
+                        try {
+                            image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageURI);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        ImageView imageView = (ImageView) findViewById(R.id.ad_image);
+                        imageView.setImageURI(imageURI);
+                    }
+
                     break;
+
             }
-        }
+            }
     }
 
     @Override
@@ -263,5 +279,27 @@ public class AddAdvertActivity extends AppCompatActivity implements View.OnClick
 
         String item = (String) adapterView.getSelectedItem();
         ads.setAdvertCategory(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add_event, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add_event:
+                Log.v("AddAdvertActivity", "add event");
+                createAd();
+                return true;
+            case R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -33,4 +33,5 @@ public class MessagingService extends FirebaseMessagingService {
         //todo:send notifs pojo to user
         super.onMessageSent(s);
     }
+
 }

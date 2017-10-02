@@ -1,6 +1,7 @@
 package com.ionicframework.udubsit252887.ui.activities;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -74,6 +76,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                                     .setValue(UID);
                             setupAdapter();
                         }
+
                     }
 
                     @Override
@@ -152,5 +155,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 .child(UID)
                 .push()
                 .setValue(comment);
+        chatEditView.setText("");
+
     }
 }

@@ -50,8 +50,8 @@ public class GroupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_group, container, false);
-        initialiseScreen();
-        return rootView;
+        initialiseScreen();         return rootView;
+
     }
 
     private void initialiseScreen() {
@@ -63,7 +63,7 @@ public class GroupFragment extends Fragment {
 
     @Override
     public void onStart() {
-        super.onStart();
+        super.onStart();    
         setupAdapter();
     }
 
@@ -82,12 +82,14 @@ public class GroupFragment extends Fragment {
                         .load(model.getThumbnailUrl())
                         .listener(new RequestListener<String, GlideDrawable>() {
                             @Override
-                            public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            public boolean onException(Exception e, String model, Target<GlideDrawable> target,
+                                                       boolean isFirstResource) {
                                 return false;
                             }
 
                             @Override
-                            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable>
+                                    target, boolean isFromMemoryCache, boolean isFirstResource) {
                                 viewHolder.progressBar.setVisibility(View.GONE);
                                 return false;
                             }

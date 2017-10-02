@@ -42,6 +42,7 @@ import com.ionicframework.udubsit252887.models.Person;
 import com.ionicframework.udubsit252887.models.Users;
 import com.ionicframework.udubsit252887.ui.dialogs.TaglineDialogs;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -54,6 +55,8 @@ public class GroupDetailActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private DatabaseReference groupUrl = FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY);
     private DatabaseReference groupList = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY);
+    private DatabaseReference groupMananager = FirebaseDatabase.getInstance().getReference(Constants.GROUPS_KEY);
+    private com.ionicframework.udubsit252887.models.GroupManager groupManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,8 @@ public class GroupDetailActivity extends AppCompatActivity {
         Glide.with(GroupDetailActivity.this)
                 .load(imageUrl)
                 .into(groupImage);
+
+
 
 
         mSectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
@@ -152,8 +157,18 @@ public class GroupDetailActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String UID = (String) dataSnapshot.getValue();
-                        DialogFragment dialogFragment = new TaglineDialogs(pushID, UID);
-                        dialogFragment.show(getSupportFragmentManager(), null);
+
+                        final DatabaseReference groupList = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY);
+                        //Incrementing group member number
+                        GroupManager.increaseGroupMembers(1, pushID);
+                        //Adding my email to group member list
+                        Utils.addToList(groupList.child(pushID), getApplicationContext());
+                        Person person = new Person(Utils.getUserEmail());
+                        DatabaseReference groupMemberRef = FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBERS)
+                                .child(pushID)
+                                .child(UID);
+                        //Adding my person object ot group
+                        GroupManager.addMember(person, groupMemberRef, getApplicationContext());
                     }
 
                     @Override
@@ -175,6 +190,16 @@ public class GroupDetailActivity extends AppCompatActivity {
     }
 
     private boolean createEvent() {
+        groupMananager.child(pushID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                groupManager = dataSnapshot.getValue(com.ionicframework.udubsit252887.models.GroupManager.class);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(GroupDetailActivity.this, "Error: "+databaseError, Toast.LENGTH_SHORT).show();
+            }
+        });
         FirebaseDatabase.getInstance().getReference(Constants.GROUP_MEMBER_LIST_KEY)
                 .child(pushID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -182,13 +207,19 @@ public class GroupDetailActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.getValue() != null) {
                             ArrayList list = (ArrayList) dataSnapshot.getValue();
-                            if (list.contains(Utils.getUserEmail())) {
+                            String useremail = Utils.getUserEmail().replace(",",".");
+                            if (useremail.equals(groupManager.getGroupManager())) {
                                 Intent intent = new Intent(GroupDetailActivity.this, AddEventActivity.class);
                                 intent.putExtra(Constants.GROUP_ID_KEY, pushID);
                                 startActivity(intent);
+
                             } else {
-                                Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
+                                Toast.makeText(GroupDetailActivity.this, "You are not allowed to add events to this group", Toast.LENGTH_LONG)
                                         .show();
+
+
+
+
                             }
                         } else {
                             Toast.makeText(GroupDetailActivity.this, "Not a member of this group", Toast.LENGTH_LONG)
@@ -292,10 +323,9 @@ public class GroupDetailActivity extends AppCompatActivity {
                             FirebaseDatabase.getInstance()
                                     .getReference(Constants.GROUP_MEMBERS)
                                     .child(pushID)
-                    ) {
+                    ){
                         @Override
                         protected void populateViewHolder(final PersonHolder viewHolder, final Person model, int position) {
-                            viewHolder.setUserTagline(model.getTagline());
                             viewHolder.personItemLayout.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -321,12 +351,11 @@ public class GroupDetailActivity extends AppCompatActivity {
 
                                         }
                                     });
-                        }
+//                        }
                     };
             LinearLayoutManager manager = new LinearLayoutManager(getContext());
-            mGroupRecycler.setLayoutManager(manager);
-            mGroupRecycler.setAdapter(adapter);
-        }
+
+        };}
 
         private void setupAdAdapter() {
             FirebaseRecyclerAdapter<Ads, AdvertHolder> adapter = new FirebaseRecyclerAdapter<Ads, AdvertHolder>(
@@ -434,9 +463,6 @@ public class GroupDetailActivity extends AppCompatActivity {
                 this.username.setText(username);
             }
 
-            public void setUserTagline(String tagline) {
-                userTagline.setText(tagline);
-            }
         }
 
 
@@ -517,7 +543,8 @@ public class GroupDetailActivity extends AppCompatActivity {
             public void setEventDate(long date) {
                 Date startDate = new Date(date);
                 eventDate.setText(
-                        Utils.getDay(startDate.getDay()) + ", " + Utils.getMonth(startDate.getMonth()) + " " + startDate.getDate() + ", " + startDate.getYear()
+                        Utils.getDay(startDate.getDay()) + ", " + Utils.getMonth(startDate.getMonth()) + " "
+                                + startDate.getDate() + ", " + startDate.getYear()
                 );
             }
 
@@ -530,8 +557,6 @@ public class GroupDetailActivity extends AppCompatActivity {
                 eventLocation.setText(local);
             }
 
-            public void setEventDirections(String eventDirections) {
-            }
 
         }
 

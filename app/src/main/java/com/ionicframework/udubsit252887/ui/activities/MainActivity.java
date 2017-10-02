@@ -25,8 +25,10 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.ionicframework.udubsit252887.BaseActivity;
 import com.ionicframework.udubsit252887.R;
 import com.ionicframework.udubsit252887.Utils.Constants;
@@ -53,6 +55,8 @@ public class MainActivity extends BaseActivity
     private TextView username;
     private NavigationView navigationView;
     private SharedPreferences sp;
+    private DatabaseReference mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,11 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("groupManagers");
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -76,6 +85,8 @@ public class MainActivity extends BaseActivity
         }
 
 
+
+
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         FIREBASE_USER = mFirebaseUser;
 
@@ -87,13 +98,7 @@ public class MainActivity extends BaseActivity
         }
         setPage(args.getInt(ARG_PAGE_NUMBER));
 
-        /*Keeping track of which screen was last shown and displaying it on startup
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        int position = sp.getInt(Constants.POSITION, 1);
-        if (position == 1) {
-            fragmentTransaction.replace(R.id.container, new GroupFragment()).commit();
-        }
-        */
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -138,12 +143,16 @@ public class MainActivity extends BaseActivity
                 });
     }
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            if(getFragmentManager().getBackStackEntryCount()>0)
+            getFragmentManager().popBackStack();
+            else
             super.onBackPressed();
         }
     }
@@ -151,7 +160,8 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        // TODO: 2/03/2017  Fix Settings fragment
+//        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 

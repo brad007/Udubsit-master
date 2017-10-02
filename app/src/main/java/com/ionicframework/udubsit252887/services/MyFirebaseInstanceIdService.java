@@ -1,5 +1,8 @@
 package com.ionicframework.udubsit252887.services;
 
+import android.nfc.Tag;
+import android.util.Log;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -10,6 +13,8 @@ public class MyFirebaseInstanceIdService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         String newToken = FirebaseInstanceId.getInstance().getToken();
+
         // upload the token to my server
+
     }
 }

@@ -2,14 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_events"
             android:icon="@drawable/ic_today_black_24dp"
-            android:title="Events" />
+            android:title="My Events" />
         <item
             android:id="@+id/nav_adverts"
             android:icon="@drawable/ic_label_black_24dp"
-            android:title="Adverts" />
+            android:title="My Adverts" />
         <item
             android:visible="false"
             android:id="@+id/nav_notices"

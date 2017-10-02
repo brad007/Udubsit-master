@@ -7,17 +7,15 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
 
     <application
         android:name=".UdubsitApplication"
@@ -65,7 +63,8 @@
             android:name=".ui.activities.AddEventActivity"
             android:label="@string/title_activity_add_event"
             android:parentActivityName=".ui.activities.GroupDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ionicframework.udubsit252887.ui.activities.GroupDetailActivity" />
@@ -84,7 +83,24 @@
         <activity
             android:name=".ui.activities.AddAdvertActivity"
             android:label="@string/title_activity_add_advert"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".ui.activities.IntroActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <service android:name=".services.MessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/udubsit_icon"/>
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_color"
+                android:resource="@color/colorAccent"/>
+        </service>
     </application>
 
 </manifest>
