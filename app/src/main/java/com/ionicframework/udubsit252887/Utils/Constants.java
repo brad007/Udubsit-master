@@ -18,7 +18,7 @@ public class Constants {
     public static final String GROUPS_KEY = "groups";
     public static final String GROUP_MANAGERS = "groupManagers";
     public static final String POI_KEY = "poi";
-    public static final String SCHEDULE_KEY = "schedule";
+    public static String SCHEDULE_KEY = "schedule";
     public static final String USERS_KEY = "users";
     public static final String EVENTS_KEY = "events";
 

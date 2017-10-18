@@ -204,7 +204,17 @@ public class MainActivity extends BaseActivity
             setPage(5);
         } else if (id == R.id.nav_ikamva) {
             setPage(6);
-        }
+        } else if (id == R.id.nav_schedule_final) {
+            setPage(7);
+        } else if (id == R.id.nav_schedule_sub) {
+            setPage(8);
+        } else if (id == R.id.nav_schedule_sda) {
+            setPage(9);
+
+        //} else if (id == R.id.nav_schedule_all) {
+        //TextView tv = (TextView) findViewById(R.id.nav_schedule_sda);
+        //        tv.setVisibility(View.GONE);
+    }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -221,6 +231,7 @@ public class MainActivity extends BaseActivity
                 inflateFragment(new POIFragment(), page);
                 break;
             case 3:
+                Constants.SCHEDULE_KEY = "schedule";
                 inflateFragment(new SchedualFragment(), page);
                 break;
             case 4:
@@ -231,6 +242,18 @@ public class MainActivity extends BaseActivity
                 break;
             case 6:
                 inflateFragment(new IkamvaFragment(), page);
+                break;
+            case 7:
+                Constants.SCHEDULE_KEY = "examschedule";
+                inflateFragment(new SchedualFragment(), page);
+                break;
+            case 8:
+                Constants.SCHEDULE_KEY = "subexamschedule";
+                inflateFragment(new SchedualFragment(), page);
+                break;
+            case 9:
+                Constants.SCHEDULE_KEY = "sdaexamschedule";
+                inflateFragment(new SchedualFragment(), page);
                 break;
         }
     }

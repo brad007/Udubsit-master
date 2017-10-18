@@ -29,10 +29,6 @@
             android:id="@+id/nav_groups"
             android:icon="@drawable/ic_group_black_24dp"
             android:title="Groups" />
-        <item
-            android:id="@+id/nav_schedule"
-            android:icon="@drawable/ic_dashboard_black_24dp"
-            android:title="Schedule" />
 
         <item
             android:id="@+id/nav_ikamva"
@@ -44,6 +40,33 @@
             android:icon="@drawable/ic_question_answer_black_24dp"
             android:title="Chats" />
     </group>
+
+    <item
+        android:enabled="true"
+        android:id="@+id/nav_schedule_all"
+        android:title="All Schedules">
+        <menu>
+            <item
+                android:id="@+id/nav_schedule"
+                android:icon="@drawable/ic_dashboard_black_24dp"
+                android:title="Schedules" />
+            <item
+                android:id="@+id/nav_schedule_final"
+                android:icon="@drawable/ic_dashboard_black_24dp"
+                android:title="Final Exam"
+                android:visible="true" />
+            <item
+                android:id="@+id/nav_schedule_sub"
+                android:icon="@drawable/ic_dashboard_black_24dp"
+                android:title="SUB Exam"
+                android:visible="true" />
+            <item
+                android:id="@+id/nav_schedule_sda"
+                android:icon="@drawable/ic_dashboard_black_24dp"
+                android:title="SDA Exam"
+                android:visible="true" />
+        </menu>
+    </item>
 
     <item android:title="Additional Options">
         <menu>
