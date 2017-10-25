@@ -70,6 +70,13 @@
 
     <item android:title="Additional Options">
         <menu>
+            <!-- Marco Bezuidenhout 2017-10-04 Administrative froms webviews-->
+            <item
+                android:id="@+id/nav_forms"
+                android:icon="@drawable/ic_label_black_24dp"
+                android:title="Admin Forms"
+                android:visible="true" />
+            <!-- ... -->
             <item
                 android:visible="false"
                 android:id="@+id/nav_settinqs"

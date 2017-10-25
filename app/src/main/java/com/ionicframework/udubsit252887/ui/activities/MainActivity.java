@@ -56,6 +56,9 @@ public class MainActivity extends BaseActivity
     private NavigationView navigationView;
     private SharedPreferences sp;
     private DatabaseReference mDatabase;
+    //Marco Bezuidenhout 2017-10-17
+    public static String webViewURL = "";
+    //-----------------------------
 
 
     @Override
@@ -214,7 +217,12 @@ public class MainActivity extends BaseActivity
         //} else if (id == R.id.nav_schedule_all) {
         //TextView tv = (TextView) findViewById(R.id.nav_schedule_sda);
         //        tv.setVisibility(View.GONE);
-    }
+
+        // Marco Bezuidenhout 2017-10-05 forms WebView
+        } else if (id == R.id.nav_forms) {
+        setPage(10);
+        }
+        //-------------------------------------------
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -255,6 +263,13 @@ public class MainActivity extends BaseActivity
                 Constants.SCHEDULE_KEY = "sdaexamschedule";
                 inflateFragment(new SchedualFragment(), page);
                 break;
+            //Marco Bezuidenhout 2017-10-05 forms WebView
+            case 10:
+                Intent intent = new Intent(this, FormsButton.class);
+                this.startActivity(intent);
+                break;
+            //-------------------------------------------
+
         }
     }
 

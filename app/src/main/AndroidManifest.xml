@@ -80,6 +80,16 @@
             android:name=".ui.activities.ChatActivity"
             android:label="@string/title_activity_chat"
             android:theme="@style/AppTheme.NoActionBar" />
+        <!--Marco Bezuidenhout 2017-10-23-->
+        <activity
+            android:name=".ui.activities.FormsButton"
+            android:label="Administrative Forms"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activities.FormsWebView"
+            android:label="Administrative Forms"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- ... -->
         <activity
             android:name=".ui.activities.AddAdvertActivity"
             android:label="@string/title_activity_add_advert"

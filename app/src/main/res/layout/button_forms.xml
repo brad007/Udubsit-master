@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Marco Bezuidenhout 2017-10-23 Forms Webview -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonUrlRD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Replacement Degree"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlGAP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Graduation Academic Procession"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlGA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Graduation Attendance"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlRES"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Remark of Exam Scripts"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlRC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recognition of Credits"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlCS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customer Survey"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlCA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Changes of Address"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlAR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Application for Readmission"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlLA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Leave of Absence"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlASS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Associate Student Status"
+        android:onClick="onClick"/>
+    <Button
+        android:id="@+id/buttonUrlPCR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Permision of Conduct Research"
+        android:onClick="onClick"/>
+
+</LinearLayout>
