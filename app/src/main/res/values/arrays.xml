@@ -13,7 +13,7 @@
         <item>Building</item>
         <item>Room</item>
         <item>Lecturer</item>
-        <item>Title</item>
+        <item>Title/CourseCode</item>
         <item>Start Date</item>
     </string-array>
 </resources>

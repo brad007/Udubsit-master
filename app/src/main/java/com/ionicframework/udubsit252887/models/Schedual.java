@@ -13,7 +13,7 @@ public class Schedual {
     private String till;
     private String title;
 
-    public Schedual(String contact, String enddate, String from, String location, String room, String startdate, String till, String title) {
+    public Schedual(String contact, String enddate, String from, String location, String room, String startdate, String starttime, String till, String title) {
 
         this.contact = contact;
         this.enddate = enddate;

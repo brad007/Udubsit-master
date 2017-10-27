@@ -91,6 +91,12 @@ public class    SchedualFragment extends Fragment implements SearchView.OnQueryT
                 viewHolder.setContact(model.getContact());
                 viewHolder.setRoom(model.getRoom());
                 viewHolder.setTitle(model.getTitle());
+                //Marco Bezuidenhout 2017-10-27 Hardcoded start date time bug fix
+                viewHolder.setStartDate(model.getStartdate());
+                viewHolder.setStartTime(model.getFrom());
+                viewHolder.setEndDate(model.getEnddate());
+                viewHolder.setEndTime(model.getTill());
+                //----------------------------------------------------------------
             }
         };
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -157,5 +163,23 @@ public class    SchedualFragment extends Fragment implements SearchView.OnQueryT
         public void setTitle(String title) {
             schedualTitle.setText(title);
         }
+
+        //Marco Bezuidenhout 2017-10-27 Hardcoded start date time bug fix
+        public void setStartDate(String startDate){
+            startDateText.setText(startDate);
+        }
+
+        public void setStartTime(String from){
+            startTimeText.setText(from);
+        }
+
+        public void setEndDate(String endDate){
+            endDateText.setText(endDate);
+        }
+
+        public void setEndTime(String till){
+            endTimeText.setText(till);
+        }
+        //----------------------------------------------------------------
     }
 }
