@@ -49,21 +49,22 @@
             <item
                 android:id="@+id/nav_schedule"
                 android:icon="@drawable/ic_dashboard_black_24dp"
-                android:title="Schedules" />
+                android:title="Schedules"
+                android:visible="false"/>
             <item
                 android:id="@+id/nav_schedule_final"
                 android:icon="@drawable/ic_dashboard_black_24dp"
-                android:title="Final Exam"
+                android:title="Final Exam 2017"
                 android:visible="true" />
             <item
                 android:id="@+id/nav_schedule_sub"
                 android:icon="@drawable/ic_dashboard_black_24dp"
-                android:title="SUB Exam"
+                android:title="SUB Exam 2017"
                 android:visible="true" />
             <item
                 android:id="@+id/nav_schedule_sda"
                 android:icon="@drawable/ic_dashboard_black_24dp"
-                android:title="SDA Exam"
+                android:title="SDA Exam 2017"
                 android:visible="true" />
         </menu>
     </item>
