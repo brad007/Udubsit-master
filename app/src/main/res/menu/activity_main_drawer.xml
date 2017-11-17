@@ -59,7 +59,7 @@
             <item
                 android:id="@+id/nav_schedule_sub"
                 android:icon="@drawable/ic_dashboard_black_24dp"
-                android:title="SUB Exam 2017"
+                android:title="SUPP Exam 2017"
                 android:visible="true" />
             <item
                 android:id="@+id/nav_schedule_sda"
